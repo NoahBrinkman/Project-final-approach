@@ -12,6 +12,8 @@ public class Square : Sprite
         }
     }
 
+    MyGame myGame;
+
     Vector2 _position;
     Vector2 _velocity;
     Vector2 _acceleration;
@@ -30,6 +32,7 @@ public class Square : Sprite
     float maxSpeed = 5;
     public Square(Vector2 pPosition, Vector2 pVelocity) : base("square.png")
     {
+        myGame = (MyGame)game;
         _position = pPosition;
         _velocity = new Vector2();
         _acceleration = new Vector2(0f, .01f);
@@ -54,13 +57,24 @@ public class Square : Sprite
         {
             _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
             Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
-            Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) * (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
+            Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) * (Mathf.Clamp(diffVec.Length(), 0, maxSpeed) / 2);
             _velocity = speed;
             charging = false;
         }
 
         if (isMoving)
         {
+            for (int  i = 0;  i < myGame.GetNumberOfAppliers();  i++)
+            {
+                ForceApplier applier = myGame.GetForceApplier(i);
+                if (applier.IsInReach(this, width,height))
+                {
+                    Console.WriteLine("force applying");
+                    _velocity += applier.force;
+                }
+            }
+
+
             _velocity += _acceleration;
             _position += _velocity;
         }
