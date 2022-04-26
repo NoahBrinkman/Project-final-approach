@@ -25,11 +25,12 @@ public class MyGame : Game
 
     public MyGame() : base(800, 600, false, false)
     {
+        targetFps = 60;
         Square square = new Square(new Vector2(100, 200), new Vector2(1, 1));
         AddChild(square);
 
         forceAppliers = new List<ForceApplier>();
-        TogglableForceApplier applier = new TogglableForceApplier("triangle.png", new Vector2(0, -0.1f), 0, 0, 1000, 0);
+        TogglableForceApplier applier = new TogglableForceApplier("triangle.png", new Vector2(0, -0.1f), true,false, 0, 0, 1000, 0);
         applier.SetXY(width / 2, height - applier.height / 2 - 200);
         AddChild(applier);
         forceAppliers.Add(applier);
