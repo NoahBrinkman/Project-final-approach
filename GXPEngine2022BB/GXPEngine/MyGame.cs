@@ -29,7 +29,7 @@ public class MyGame : Game
         AddChild(square);
 
         forceAppliers = new List<ForceApplier>();
-        ForceApplier applier = new ForceApplier("triangle.png", new Vector2(0, -0.1f), 0, 0, 1000, 0);
+        TogglableForceApplier applier = new TogglableForceApplier("triangle.png", new Vector2(0, -0.1f), 0, 0, 1000, 0);
         applier.SetXY(width / 2, height - applier.height / 2 - 200);
         AddChild(applier);
         forceAppliers.Add(applier);
