@@ -27,10 +27,10 @@ public class MyGame : Game
 	{
 		forceAppliers = new List<ForceApplier>();
 
-		Square square = new Square(new Vector2(100, 400), new Vector2(1, 1));
+		Square square = new Square(new Vector2(100, 200), new Vector2(1, 1));
 		AddChild(square);
-		ForceApplier applier = new ForceApplier("triangle.png", new Vector2(0, -0.1f),0,0,100,0);
-		applier.SetXY(width / 2, height - applier.height / 2);
+		ForceApplier applier = new ForceApplier("triangle.png", new Vector2(0, -0.1f), 0, 0, 1000, 0);
+		applier.SetXY(width / 2, height - applier.height / 2 - 200);
 		AddChild(applier);
 		forceAppliers.Add(applier);
 	}

@@ -67,9 +67,9 @@ public class Square : Sprite
             for (int  i = 0;  i < myGame.GetNumberOfAppliers();  i++)
             {
                 ForceApplier applier = myGame.GetForceApplier(i);
-                if (applier.IsInReach(this, width,height))
+                if (applier.IsInHorizontalReach(this,width,height) || applier.IsInVerticalReach(this,width,height))
                 {
-                    Console.WriteLine("force applying");
+                    Console.WriteLine("collision");
                     _velocity += applier.force;
                 }
             }

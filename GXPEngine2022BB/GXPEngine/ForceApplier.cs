@@ -22,11 +22,16 @@ namespace GXPEngine
             this.reachTop = reachTop;
             this.force = power; 
         }
-        public bool IsInReach(GameObject other, float otherWidth, float otherHeight)
+
+        public bool IsInHorizontalReach(GameObject other, float otherWidth, float otherHeight)
         {
-            return (other.x + otherWidth / 2 > x - width / 2 - reachLeft) && (other.x - otherWidth / 2 < x + width / 2 + reachRight) ||
-                (other.y + otherHeight / 2 < y - height / 2 - reachTop && other.y - otherHeight / 2 > y + height / 2 + reachBottom);
-           
+            return  ((other.x < x && other.x > x - width / 2 - reachLeft && other.y > y - height / 2 && other.y < y + height / 2) && reachLeft != 0) ||
+                    (other.x > x && other.x < x + width / 2 + reachRight && other.y > y - height / 2 && other.y < y + height / 2 && reachRight != 0);
+        }
+        public bool IsInVerticalReach(GameObject other, float otherWidth, float otherHeight)
+        {
+            return ((other.y < y && other.y > y - height / 2 - reachTop && other.x > x - width / 2 && other.x < x + width / 2 && reachTop != 0) ||
+                    (other.y > y && other.y < y + height / 2 + reachBottom && other.x > x - width / 2 && other.x < x + width / 2 && reachBottom != 0));
         }
     }
 }
