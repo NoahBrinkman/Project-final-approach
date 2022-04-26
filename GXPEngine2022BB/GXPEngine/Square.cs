@@ -1,6 +1,7 @@
 ﻿using System;
 using GXPEngine;
 using GXPEngine.Core;
+using GXPEngine.Scenes;
 
 public class Square : Sprite
 {
@@ -64,9 +65,11 @@ public class Square : Sprite
 
         if (isMoving)
         {
-            for (int  i = 0;  i < myGame.GetNumberOfAppliers();  i++)
+            //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
+           TestingScene currentScene = (TestingScene)SceneManager.instance.GetActiveScene();
+            for (int  i = 0;  i < currentScene.GetNumberOfAppliers();  i++)
             {
-                ForceApplier applier = myGame.GetForceApplier(i);
+                ForceApplier applier = currentScene.GetForceApplier(i);
                 if (applier.IsInHorizontalReach(this,width,height) || applier.IsInVerticalReach(this,width,height))
                 {
                     _velocity += applier.force;

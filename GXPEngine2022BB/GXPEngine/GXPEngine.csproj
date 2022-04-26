@@ -82,6 +82,10 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
+    <Compile Include="Scenes\Level.cs" />
+    <Compile Include="Scenes\Scene.cs" />
+    <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\TestingScene.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="TogglableForceApplier.cs" />
   </ItemGroup>
