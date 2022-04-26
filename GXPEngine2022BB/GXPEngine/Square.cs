@@ -69,7 +69,6 @@ public class Square : Sprite
                 ForceApplier applier = myGame.GetForceApplier(i);
                 if (applier.IsInHorizontalReach(this,width,height) || applier.IsInVerticalReach(this,width,height))
                 {
-                    Console.WriteLine("collision");
                     _velocity += applier.force;
                 }
             }
