@@ -9,12 +9,15 @@ public class MyGame : Game
 
 
 
-    public MyGame() : base(800, 600, false, false)
+    public MyGame() : base(1920, 1024, false, false)
     {
         targetFps = 60;
-        TestingScene scene = new TestingScene();
+        /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);
-        SceneManager.instance.LoadScene(scene);
+        SceneManager.instance.LoadScene(scene);*/
+        Level level = new Level("TestLevel.tmx");
+        SceneManager.instance.AddScene(level);
+        SceneManager.instance.LoadScene(level);
     }
 
     public void Update()
