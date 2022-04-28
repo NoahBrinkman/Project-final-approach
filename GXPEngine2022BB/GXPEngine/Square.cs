@@ -37,6 +37,7 @@ namespace GXPEngine
 
         public Square(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
         {
+            SetOrigin(width / 2, height / 2);
             Initialize(obj);
         }
 
@@ -62,7 +63,7 @@ namespace GXPEngine
         void Update()
         {
 
-            if (Input.GetMouseButtonDown(0) && (Input.mouseX > x && Input.mouseX < x + width) && (Input.mouseY > y && Input.mouseY < y + height) && !isMoving)
+            if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
             {
                 _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
                 charging = true;
