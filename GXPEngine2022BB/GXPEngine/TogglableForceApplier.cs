@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiledMapParser;
 
 namespace GXPEngine
 {
@@ -11,7 +12,12 @@ namespace GXPEngine
 		public bool activatable = true;
 		public bool activated = false;
 
-
+		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base("triangle.png",new Vector2(), 0, 0, 0, 0)
+		{
+			Initialize(obj);
+			activatable = obj.GetBoolProperty("activatable");
+			activated = obj.GetBoolProperty("activated");
+		}
 		public TogglableForceApplier(string fileName, Vector2 power, bool activatable, bool activated, float reachLeft = 0, float reachRight = 0, float reachTop = 0, float reachBottom = 0) : base(fileName, power, reachLeft,reachRight,reachTop,reachBottom)
 		{
 			this.activatable = activatable;
