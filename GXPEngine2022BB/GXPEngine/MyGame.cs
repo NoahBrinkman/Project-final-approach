@@ -9,7 +9,7 @@ public class MyGame : Game
 
 
 
-    public MyGame() : base(1366, 768, false, false)
+    public MyGame() : base(1366, 768, false)
     {
         targetFps = 60;
         /*TestingScene scene = new TestingScene();
