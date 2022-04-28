@@ -9,7 +9,7 @@ public class MyGame : Game
 
 
 
-    public MyGame() : base(1366, 768, false)
+    public MyGame() : base(1344, 768, false)
     {
         /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);

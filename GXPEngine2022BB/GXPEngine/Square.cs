@@ -56,6 +56,7 @@ namespace GXPEngine
             _position = new Vector2(obj.X, obj.Y);
             _acceleration = new Vector2(0f, .01f);
         }
+
         void UpdateScreenPosition()
         {
             x = _position.x;
@@ -91,8 +92,6 @@ namespace GXPEngine
                         _velocity += applier.force;
                     }
                 }
-
-
                 _velocity += _acceleration;
                 _position += _velocity;
             }

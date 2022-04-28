@@ -62,7 +62,7 @@ namespace GXPEngine
 			{
                 if(item.parent == this)
 				{
-                Console.WriteLine("Heve been added");
+                Console.WriteLine("Have been added");
                     forceAppliers.Add(item);
 				}
                     
