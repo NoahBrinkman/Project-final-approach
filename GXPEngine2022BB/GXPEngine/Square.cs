@@ -35,6 +35,8 @@ namespace GXPEngine
         bool charging = false;
         float maxSpeed = 5;
 
+        public Action death;
+
         public Square(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
         {
             SetOrigin(width / 2, height / 2);
@@ -96,5 +98,16 @@ namespace GXPEngine
             }
             UpdateScreenPosition();
         }
+
+        void OnCollision(GameObject other)
+        {
+            if (!(other is Goal))
+            {
+                death = Death;
+                death.Invoke();
+            }
+        }
+
+        static void Death() => Console.WriteLine("dead");
     }
 }
