@@ -124,7 +124,7 @@ namespace GXPEngine
         {
             if (activeScene is Level)
             {
-                return (Level)activeScene;
+              //  return (Level)activeScene;
             }
             return null;
         }

@@ -15,7 +15,7 @@ namespace GXPEngine
                 return _position;
             }
         }
-
+        MyGame myGame;
 
         Vector2 _position;
         Vector2 _velocity;
@@ -38,25 +38,30 @@ namespace GXPEngine
 
         public Square(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
         {
+           
             SetOrigin(width / 2, height / 2);
             Initialize(obj);
         }
 
         public Square(Vector2 pPosition, Vector2 pVelocity) : base("PH_Airplane.png", 1, 1)
         {
+            myGame = (MyGame)game;
             _easyDraw = new EasyDraw(game.width, game.height, false);
             _position = pPosition;
             _velocity = new Vector2();
             _acceleration = new Vector2(0f, .03f);
             charging = false;
             parent.AddChild(_easyDraw);
+            death = new Action(Death);
         }
         void Initialize(TiledObject obj)
         {
+            myGame = (MyGame)game;
             _easyDraw = new EasyDraw(game.width, game.height,false);
             _position = new Vector2(obj.X, obj.Y);
             _acceleration = new Vector2(0.04f, .025f);
             game.AddChild(_easyDraw);
+            death = new Action(Death);
         }
 
         void UpdateScreenPosition()
@@ -67,6 +72,7 @@ namespace GXPEngine
 
         void Update()
         {
+
             _easyDraw.ClearTransparent();
 			if (Input.GetKeyDown(Key.R))
 			{
@@ -102,7 +108,7 @@ namespace GXPEngine
             if (isMoving)
             {
                 //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
-                Level currentScene = SceneManager.instance.GetActiveLevel();
+                Level currentScene = myGame.GetCurrentLevel();
                 for (int i = 0; i < currentScene.GetNumberOfAppliers(); i++)
                 {
                     ForceApplier applier = currentScene.GetForceApplier(i);
@@ -119,13 +125,17 @@ namespace GXPEngine
             }
             UpdateScreenPosition();
         }
-
         void OnCollision(GameObject other)
         {
             if (!(other is Goal))
             {
-                death = Death;
-                death.Invoke();
+				if (isMoving)
+				{
+                    //death += Death;
+                    if(death != null)
+                        death.Invoke();
+				}
+              
             }
         }
 

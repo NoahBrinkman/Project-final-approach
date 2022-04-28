@@ -11,7 +11,7 @@ namespace GXPEngine
     /// A level withing the game based on an enemy map provided by tiled.
     /// Will be changed to something we can actually use
     /// </summary>
-    public class Level : Scene
+    public class Level : GameObject
     {
   
         public Action onLevelComplete;
@@ -37,18 +37,18 @@ namespace GXPEngine
         {
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
+            Console.WriteLine("Level Initialized");
         }
         
         
         /// <summary>
-        ///Set up the level.
-        /// Start the player in it's position
-        /// Spawn all enemies
-        /// Count how many there are and set up enemies left
+        /// 
+        /// 
+        /// 
         /// </summary>
-        protected override void Start()
+        public void Start()
         {
-            isActive = true;
+            Console.WriteLine("Start");
             visible = true;
             if (fileName != "")
             {
@@ -58,15 +58,19 @@ namespace GXPEngine
                 //levelMap.LoadTileLayers();
                 levelMap.LoadObjectGroups();
             }
-			foreach (ForceApplier item in FindObjectsOfType<ForceApplier>())
+
+            Square player = FindObjectOfType<Square>();
+            if(player != null)
 			{
-                if(item.parent == this)
-				{
-                Console.WriteLine("Have been added");
-                    forceAppliers.Add(item);
-				}
-                    
-			}
+                Console.WriteLine("Added playerDeath");
+                player.death += OnPlayerDeath;
+            }
+            Goal goal = FindObjectOfType<Goal>(); 
+            if(goal != null)
+			{
+                goal.goalHit += OnGoalHit;
+
+            }
         }
 
         /// <summary>
@@ -75,15 +79,24 @@ namespace GXPEngine
         /// When hte level is considered complete. Start a timer. When this timer is complete go to the next level
         /// When you are out of health. Tell the game to end it.
         /// </summary>
-        protected override void Update()
+         void Update()
         {
-            if (!base.isActive)
-            {
-                return;
-            }
 
         }
 
+        public void OnPlayerDeath()
+		{
+            Console.WriteLine("Trying to load last scene");
+            MyGame mg = (MyGame)game;
+            mg.LoadGameOverScene();
+            mg.DestroyScene(this);
+		}
 
+        private void OnGoalHit()
+		{
+            MyGame mg = (MyGame)game;
+            mg.LoadCongratulationsScene();
+            mg.DestroyScene(this);
+        }
     }
 }
