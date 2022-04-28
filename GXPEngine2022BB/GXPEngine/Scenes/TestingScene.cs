@@ -26,7 +26,7 @@ namespace GXPEngine.Scenes
         }
         public TestingScene()
 		{
-			Square square = new Square(new Vector2(0, 0), new Vector2(1, 1));
+			Square square = new Square(new Vector2(0, 0), new Vector2( .5f, .5f));
 			AddChild(square);
 
 			forceAppliers = new List<ForceApplier>();

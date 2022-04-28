@@ -67,11 +67,10 @@ namespace GXPEngine
 
         void Update()
         {
-            
             _easyDraw.ClearTransparent();
 			if (Input.GetKeyDown(Key.R))
 			{
-                _position.SetXY(200, 100);
+                _position.SetXY(192, 576);
                 _velocity = new Vector2();
 			}
             if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
@@ -114,6 +113,8 @@ namespace GXPEngine
                 }
                 //_acceleration += new Vector2(0, _acceleration.y / 2);
                 _velocity += _acceleration;
+                _velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
+                _velocity.y = Mathf.Clamp(_velocity.y, -maxSpeed, maxSpeed);
                 _position += _velocity;
             }
             UpdateScreenPosition();
