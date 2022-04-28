@@ -53,10 +53,24 @@ namespace GXPEngine
             if (fileName != "")
             {
                 TiledLoader levelMap = new TiledLoader(fileName, this);
-                levelMap.autoInstance = true;
+                levelMap.addColliders = false;
+                levelMap.autoInstance = false;
                 levelMap.LoadImageLayers();
                 //levelMap.LoadTileLayers();
+                levelMap.autoInstance = true;
+                levelMap.addColliders = true;
                 levelMap.LoadObjectGroups();
+
+                List<GameObject> children = GetChildren();
+				for (int i = 0; i < children.Count; i++)
+				{
+                    if(children[i] is ForceApplier)
+					{
+                        ForceApplier forceApplier = (ForceApplier)children[i];
+                        forceAppliers.Add(forceApplier);
+					}
+				}
+
             }
 
             Square player = FindObjectOfType<Square>();
