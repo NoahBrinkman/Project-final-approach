@@ -16,6 +16,7 @@ namespace GXPEngine
             }
         }
 
+        MyGame myGame;
 
         Vector2 _position;
         Vector2 _velocity;
@@ -23,7 +24,7 @@ namespace GXPEngine
 
         Vector2 _mouseStartPosition;
         Vector2 _mouseEndPosition;
-        EasyDraw _easyDraw;
+
         bool isMoving
         {
             get
@@ -42,19 +43,16 @@ namespace GXPEngine
 
         public Square(Vector2 pPosition, Vector2 pVelocity) : base("square.png", 1, 1)
         {
-            _easyDraw = new EasyDraw(game.width, game.height, false);
+            myGame = (MyGame)game;
             _position = pPosition;
             _velocity = new Vector2();
-            _acceleration = new Vector2(0f, .03f);
+            _acceleration = new Vector2(0f, .01f);
             charging = false;
-            parent.AddChild(_easyDraw);
         }
         void Initialize(TiledObject obj)
         {
-            _easyDraw = new EasyDraw(game.width, game.height,false);
             _position = new Vector2(obj.X, obj.Y);
-            _acceleration = new Vector2(0.04f, .025f);
-            game.AddChild(_easyDraw);
+            _acceleration = new Vector2(0f, .01f);
         }
         void UpdateScreenPosition()
         {
@@ -64,35 +62,17 @@ namespace GXPEngine
 
         void Update()
         {
-            
-            _easyDraw.ClearTransparent();
-			if (Input.GetKeyDown(Key.R))
-			{
-                _position.SetXY(200, 100);
-                _velocity = new Vector2();
-			}
+
             if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
             {
                 _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
                 charging = true;
             }
-            _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
-            Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
-            Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) * (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
-            if (charging)
-			{
-                Vector2 projection = _position;
-                Vector2 simulatedSpeed = speed;
-                for(int i = 2; i <= 16; i += 2)
-				{
-                    simulatedSpeed += _acceleration * i;
-                    projection += simulatedSpeed * i;
-                    _easyDraw.Ellipse(projection.x,projection.y, 10 - (i/2), 10 -(i / 2));
-				}
-			}
             if (Input.GetMouseButtonUp(0) && charging)
             {
-
+                _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
+                Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
+                Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) * (Mathf.Clamp(diffVec.Length(), 0, maxSpeed) / 2);
                 _velocity = speed;
                 charging = false;
             }
@@ -109,7 +89,8 @@ namespace GXPEngine
                         _velocity += applier.force;
                     }
                 }
-                //_acceleration += new Vector2(0, _acceleration.y / 2);
+
+
                 _velocity += _acceleration;
                 _position += _velocity;
             }
