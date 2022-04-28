@@ -9,9 +9,8 @@ public class MyGame : Game
 
 
 
-    public MyGame() : base(1366, 768, false, false)
+    public MyGame() : base(1366, 768, false)
     {
-        targetFps = 60;
         /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);
         SeneManager.instance.LoadScene(scene);*/
@@ -23,12 +22,10 @@ public class MyGame : Game
     public void Update()
     {
         HandleInput();
-        Console.WriteLine(currentFps);
     }
 
     void HandleInput()
     {
-        //targetFps = Input.GetKey(Key.SPACE) ? 30 : 60;
     }
 
     static void Main()
