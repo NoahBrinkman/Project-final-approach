@@ -21,7 +21,7 @@ namespace GXPEngine
         {
             if(other is Square)
             {
-                goalHit = GoalHit;
+                goalHit += GoalHit;
                 goalHit.Invoke();
             }
         }

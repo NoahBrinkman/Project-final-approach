@@ -22,7 +22,7 @@ namespace GXPEngine
         /// </summary>
         public virtual void LoadScene() 
         {
-            //Console.WriteLine("LoadScene started");
+            Console.WriteLine("LoadScene started");
             Start();
         }
         
