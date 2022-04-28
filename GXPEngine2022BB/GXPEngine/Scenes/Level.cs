@@ -54,7 +54,7 @@ namespace GXPEngine
             {
                 TiledLoader levelMap = new TiledLoader(fileName, this);
                 levelMap.autoInstance = true;
-                //levelMap.LoadImageLayers();
+                levelMap.LoadImageLayers();
                 //levelMap.LoadTileLayers();
                 levelMap.LoadObjectGroups();
             }

@@ -42,7 +42,7 @@ namespace GXPEngine
             Initialize(obj);
         }
 
-        public Square(Vector2 pPosition, Vector2 pVelocity) : base("square.png", 1, 1)
+        public Square(Vector2 pPosition, Vector2 pVelocity) : base("PH_Airplane.png", 1, 1)
         {
             _easyDraw = new EasyDraw(game.width, game.height, false);
             _position = pPosition;
@@ -70,7 +70,7 @@ namespace GXPEngine
             _easyDraw.ClearTransparent();
 			if (Input.GetKeyDown(Key.R))
 			{
-                _position.SetXY(192, 576);
+                _position.SetXY(206.67f, 489.33f);
                 _velocity = new Vector2();
 			}
             if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)

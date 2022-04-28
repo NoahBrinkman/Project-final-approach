@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace GXPEngine
 		public bool activatable = true;
 		public bool activated = false;
 
-		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base("triangle.png",new Vector2(), 0, 0, 0, 0)
+		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base(fileName,new Vector2(), 0, 0, 0, 0)
 		{
 			Initialize(obj);
 			activatable = obj.GetBoolProperty("activatable");
@@ -32,6 +33,12 @@ namespace GXPEngine
 					OnClicked();
 				}
 			}
+
+			//TEMP REMOVE LATER FOR SPRITE SWITCH
+			if (activated)
+				SetColor(0, 255, 0);
+			else
+				SetColor(255, 255, 255);
 		}
 		void OnClicked()
 		{
@@ -40,7 +47,9 @@ namespace GXPEngine
 		public override bool IsInHorizontalReach(GameObject other, float width, float height)
 		{
 			if (activated)
-				return base.IsInHorizontalReach(other,width,height);
+            {
+				return base.IsInHorizontalReach(other, width, height);
+			}	
 			else
 			{
 				return false;
