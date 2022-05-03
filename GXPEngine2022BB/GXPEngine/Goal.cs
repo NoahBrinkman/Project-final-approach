@@ -26,6 +26,9 @@ namespace GXPEngine
             }
         }
 
-        static void GoalHit() => Console.WriteLine("win");
+        static void GoalHit()
+        {
+            Console.WriteLine("win");
+        } 
     }
 }

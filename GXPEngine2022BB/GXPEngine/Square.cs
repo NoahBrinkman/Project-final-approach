@@ -139,6 +139,9 @@ namespace GXPEngine
             }
         }
 
-        static void Death() => Console.WriteLine("dead");
+        static void Death()
+        {
+            Console.WriteLine("dead");
+        } 
     }
 }
