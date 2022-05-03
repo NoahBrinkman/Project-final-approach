@@ -13,7 +13,6 @@ public class MyGame : Game
         /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);
         SeneManager.instance.LoadScene(scene);*/
-
         LoadGame();
     }
     void LoadGame()
