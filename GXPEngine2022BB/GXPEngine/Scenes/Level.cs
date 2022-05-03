@@ -11,7 +11,7 @@ namespace GXPEngine
     /// A level withing the game based on an enemy map provided by tiled.
     /// Will be changed to something we can actually use
     /// </summary>
-    public class Level : GameObject
+    public class Level : Scene
     {
   
         public Action onLevelComplete;
@@ -37,7 +37,6 @@ namespace GXPEngine
         {
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
-            Console.WriteLine("Level Initialized");
         }
         
         
@@ -46,7 +45,7 @@ namespace GXPEngine
         /// 
         /// 
         /// </summary>
-        public void Start()
+        protected override void Start()
         {
             Console.WriteLine("Start");
             visible = true;
@@ -100,17 +99,12 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
-            Console.WriteLine("Trying to load last scene");
-            MyGame mg = (MyGame)game;
-            mg.LoadGameOverScene();
-            mg.DestroyScene(this);
+            SceneManager.instance.LoadLastSceneInBuildIndex();
 		}
 
         private void OnGoalHit()
 		{
-            MyGame mg = (MyGame)game;
-            mg.LoadCongratulationsScene();
-            mg.DestroyScene(this);
+         SceneManager.instance.TryLoadNextScene();
         }
     }
 }

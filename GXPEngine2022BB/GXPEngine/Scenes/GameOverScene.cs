@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GXPEngine.Scenes
 {
-	public class GameOverScene : GameObject
+	public class GameOverScene : Scene
 	{
 		public GameOverScene()
 		{
