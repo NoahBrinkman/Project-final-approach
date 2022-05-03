@@ -24,6 +24,8 @@ namespace GXPEngine
         Vector2 _mouseStartPosition;
         Vector2 _mouseEndPosition;
         EasyDraw _easyDraw;
+
+        public LevelCamera cam;
         bool isMoving
         {
             get
@@ -79,11 +81,14 @@ namespace GXPEngine
 			{
                 _position.SetXY(206.67f, 489.33f);
                 _velocity = new Vector2();
+                Level currentScene = (Level)SceneManager.instance.activeScene;
+                currentScene.PlayerStoppedMoving();
 			}
             if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
             {
                 _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
                 charging = true;
+                cam.canDrag = false;
             }
             _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
             Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
@@ -101,7 +106,8 @@ namespace GXPEngine
 			}
             if (Input.GetMouseButtonUp(0) && charging)
             {
-
+                Level currentScene = (Level)SceneManager.instance.activeScene;
+                currentScene.PlayerStartedMoving();
                 _velocity = speed;
                 charging = false;
             }
