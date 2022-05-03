@@ -1,6 +1,5 @@
 using System;
 using GXPEngine;
-using System.Drawing;
 using System.Collections.Generic;
 using GXPEngine.Scenes;
 
@@ -18,21 +17,25 @@ public class MyGame : Game
         LoadGame();
     }
     void LoadGame()
-	{
-        MainMenuScene mainMenu = new MainMenuScene();
-        scenes.Add(mainMenu);
-
+    {
+	    MainMenuScene mainMenu = new MainMenuScene();
+       // scenes.Add(mainMenu);
+		SceneManager.instance.AddScene(mainMenu);
         Level level = new Level("TestLevel.tmx");
-        scenes.Add(level);
+		SceneManager.instance.AddScene(level);
+        //scenes.Add(level);
 
         CongratulationsScene congratulationsScene = new CongratulationsScene();
-        scenes.Add(congratulationsScene);
+        SceneManager.instance.AddScene(congratulationsScene);
+       // scenes.Add(congratulationsScene);
 
         GameOverScene gameOverScene = new GameOverScene();
-        scenes.Add(gameOverScene);
+        SceneManager.instance.AddScene(gameOverScene);
+       // SceneManager.instance.LoadScene(0);
+       // scenes.Add(gameOverScene);
 
-        MainMenuScene loadedMainMenu = (MainMenuScene)scenes[0];
-        AddChild(loadedMainMenu);
+        
+        //AddChild(loadedMainMenu);
     }
     public void LoadFirstLevel()
 	{
@@ -42,7 +45,7 @@ public class MyGame : Game
 			{
                 AddChild(scenes[i]);
                 Level level = (Level)scenes[i];
-                level.Start();
+	                //level.Start();
                 return;
 			}
 		}
@@ -90,9 +93,9 @@ public class MyGame : Game
     }
     public void ReloadGame()
 	{
-        scenes.Clear();
-        GetChildren().ForEach(x => x.LateDestroy());
+        SceneManager.instance.WipeScenes();
         LoadGame();
+        List<GameObject> Children = new List<GameObject>();
 	}
 
     public void Update()
@@ -104,7 +107,7 @@ public class MyGame : Game
     {
 		if (Input.GetKeyDown(Key.D))
 		{
-            Console.WriteLine(GetChildCount());
+            Console.WriteLine(GetChildren().Count);
 		}
     }
 

@@ -38,7 +38,6 @@ namespace GXPEngine
 
         public Square(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
         {
-           
             SetOrigin(width / 2, height / 2);
             Initialize(obj);
         }
@@ -51,16 +50,15 @@ namespace GXPEngine
             _velocity = new Vector2();
             _acceleration = new Vector2(0f, .03f);
             charging = false;
-            parent.AddChild(_easyDraw);
             death = new Action(Death);
         }
         void Initialize(TiledObject obj)
         {
             myGame = (MyGame)game;
             _easyDraw = new EasyDraw(game.width, game.height,false);
+            
             _position = new Vector2(obj.X, obj.Y);
             _acceleration = new Vector2(0.04f, .025f);
-            game.AddChild(_easyDraw);
             death = new Action(Death);
         }
 
@@ -72,7 +70,10 @@ namespace GXPEngine
 
         void Update()
         {
-
+            if (_easyDraw.parent == null)
+            {
+                parent.AddChild(_easyDraw);
+            }
             _easyDraw.ClearTransparent();
 			if (Input.GetKeyDown(Key.R))
 			{
@@ -108,7 +109,7 @@ namespace GXPEngine
             if (isMoving)
             {
                 //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
-                Level currentScene = myGame.GetCurrentLevel();
+                Level currentScene = (Level)SceneManager.instance.activeScene;
                 for (int i = 0; i < currentScene.GetNumberOfAppliers(); i++)
                 {
                     ForceApplier applier = currentScene.GetForceApplier(i);
