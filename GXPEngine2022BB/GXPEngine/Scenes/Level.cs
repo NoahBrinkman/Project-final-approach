@@ -70,7 +70,7 @@ namespace GXPEngine
                         forceAppliers.Add(forceApplier);
 					}
 
-                    if(children[i].name is "PH_BackgroundDouble.png")
+                    if(children[i].name == "PH_BackgroundDouble.png")
                     {
                         background = (Sprite)children[i];
                     }
@@ -80,7 +80,7 @@ namespace GXPEngine
 
           
             Square player = FindObjectOfType<Square>();
-            LevelCamera levelCamera = new LevelCamera(game.width/2, game.width * 1.5f, player);
+            LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
             levelCamera.SetXY(game.width/2,game.height/2);
             AddChild(levelCamera);
             if(player != null)
