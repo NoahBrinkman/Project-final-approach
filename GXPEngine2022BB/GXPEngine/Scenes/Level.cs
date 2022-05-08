@@ -71,10 +71,12 @@ namespace GXPEngine
                     
 				}
             }
-            LevelCamera levelCamera = new LevelCamera(game.width/2, game.width * 1.5f);
-            AddChild(levelCamera);
-            levelCamera.SetXY(game.width/2,game.height/2);
+
+          
             Square player = FindObjectOfType<Square>();
+            LevelCamera levelCamera = new LevelCamera(game.width/2, game.width * 1.5f, player);
+            levelCamera.SetXY(game.width/2,game.height/2);
+            AddChild(levelCamera);
             if(player != null)
             {
                 this.player = player;

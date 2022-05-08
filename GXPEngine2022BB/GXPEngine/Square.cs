@@ -26,7 +26,7 @@ namespace GXPEngine
         EasyDraw _easyDraw;
 
         public LevelCamera cam;
-        bool isMoving
+        public bool isMoving
         {
             get
             {
