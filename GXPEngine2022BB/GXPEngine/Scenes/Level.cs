@@ -17,6 +17,7 @@ namespace GXPEngine
         public Action onLevelComplete;
         private string fileName;
         private Square player;
+        private Sprite background;
         List<ForceApplier> forceAppliers;
         public int GetNumberOfAppliers()
         {
@@ -68,6 +69,11 @@ namespace GXPEngine
                         ForceApplier forceApplier = (ForceApplier)children[i];
                         forceAppliers.Add(forceApplier);
 					}
+
+                    if(children[i].name is "PH_BackgroundDouble.png")
+                    {
+                        background = (Sprite)children[i];
+                    }
                     
 				}
             }
@@ -86,7 +92,6 @@ namespace GXPEngine
             if(goal != null)
 			{
                 goal.goalHit += OnGoalHit;
-
             }
         }
 
@@ -122,6 +127,12 @@ namespace GXPEngine
 
             player.cam.canDrag = true;
         }
+        
+        public Vector2 GetBorders()
+        {
+            return(new Vector2(background.width, background.height));
+        }
+
         public void OnPlayerDeath()
 		{
             SceneManager.instance.LoadLastSceneInBuildIndex();
