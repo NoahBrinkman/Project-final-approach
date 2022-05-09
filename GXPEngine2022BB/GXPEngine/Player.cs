@@ -38,7 +38,8 @@ namespace GXPEngine
 
         public Action death;
 
-        public Player(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
+        public Player(string fileName, int rows, int cols, TiledObject obj = null) 
+            : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
         {
             SetOrigin(width / 2, height / 2);
             Initialize(obj);

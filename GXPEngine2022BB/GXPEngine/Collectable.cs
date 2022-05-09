@@ -4,7 +4,7 @@ namespace GXPEngine
 {
     public class Collectable : AnimationSprite
     {
-        public Collectable(TiledObject obj = null) 
+        public Collectable(string fileName, int rows, int cols, TiledObject obj = null) 
             : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
         {
             Initialize(obj);
@@ -22,7 +22,7 @@ namespace GXPEngine
 
         private void Update()
         {
-            Animate(.6f);
+            Animate(.06f);
         }
 
 
