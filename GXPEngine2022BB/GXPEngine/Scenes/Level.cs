@@ -96,6 +96,14 @@ namespace GXPEngine
 			{
                 goal.goalHit += OnGoalHit;
             }
+            
+            List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
+            foreach (ForceApplier tForceApplier in tForceAppliers)
+            {
+                TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
+                toggleForceApplier.SetLevelCamera(levelCamera);
+            }
+            
         }
 
         /// <summary>

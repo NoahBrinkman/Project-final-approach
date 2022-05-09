@@ -138,7 +138,7 @@ namespace GXPEngine
 
                 //_acceleration += new Vector2(0, _acceleration.y / 2);
                 _velocity += _acceleration;
-                _velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
+                //_velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
                 _velocity.y = Mathf.Clamp(_velocity.y, -maxSpeed, maxSpeed);
                 _velocity *= .995f;
                 _position += _velocity;

@@ -13,7 +13,7 @@ namespace GXPEngine
 		public bool shouldBeActivatable = true;
 		public bool activatable = true;
 		public bool activated = false;
-
+		private LevelCamera camera;
 		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base(fileName,new Vector2(), 0, 0, 0, 0)
 		{
 			Initialize(obj);
@@ -27,11 +27,18 @@ namespace GXPEngine
 			shouldBeActivatable = activatable;
 			this.activated = activated;
 		}
+
+		public void SetLevelCamera(LevelCamera cam)
+		{
+			camera = cam;
+		}
+		
 		void Update()
 		{
 			if (activatable)
 			{
-				if(Input.GetMouseButtonDown(0) && (Input.mouseX > x - width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2))
+				float mouseX = camera.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
+				if(Input.GetMouseButtonDown(0) && (mouseX  > (x ) - width/2 && mouseX < (x) + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2))
 				{
 					OnClicked();
 				}
