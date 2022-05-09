@@ -27,6 +27,7 @@ namespace GXPEngine
         private Sprite background;
         private LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
+        private LevelOverlay overlay;
         public int GetNumberOfAppliers()
         {
             return forceAppliers.Count;
@@ -98,6 +99,11 @@ namespace GXPEngine
 			{
                 goal.goalHit += OnGoalHit;
             }
+
+            overlay = new LevelOverlay(levelCamera);
+            AddChild(overlay);
+            overlay.TurnVisibility(false);
+
         }
 
          void Update()
@@ -134,17 +140,14 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
-            LevelOverlay levelOverlay = new LevelOverlay(false);
-            LateAddChild(levelOverlay);
-            levelOverlay.x = levelCamera.x - game.width / 2;
+            overlay.TurnVisibility(true);
             player.LateDestroy();
         }
 
         private void OnGoalHit()
-		{
-            LevelOverlay levelOverlay = new LevelOverlay(true);
-            levelOverlay.x = levelCamera.x - game.width/2;
-            LateAddChild(levelOverlay);
+        {
+            overlay.hasWon = true;
+            overlay.TurnVisibility(true);
             player.LateDestroy();
         }
     }
