@@ -25,7 +25,7 @@ namespace GXPEngine
         private string fileName;
         private Player player;
         private Sprite background;
-        private LevelCamera levelCamera;
+        public LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
         public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
@@ -104,7 +104,6 @@ namespace GXPEngine
             AddChild(overlay);
             overlay.TurnVisibility(false);
 
-            
             List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
             foreach (ForceApplier tForceApplier in tForceAppliers)
             {
