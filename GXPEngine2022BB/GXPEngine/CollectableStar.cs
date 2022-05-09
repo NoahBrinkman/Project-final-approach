@@ -4,20 +4,26 @@ namespace GXPEngine
 {
     public class Collectable : AnimationSprite
     {
-        public Collectable(string fileName, int cols,int rows) : base("", 1, 1)
+        public Collectable(TiledObject obj = null) 
+            : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
         {
+            Initialize(obj);
             
         }
-        public Collectable(TiledObject obj = null) : base("", 1, 1)
+        public Collectable() 
+            : base("",1,1)
         {
-            
-        }
 
+        }
         private void Initialize(TiledObject obj)
         {
-            
+            SetCycle(0,8);
         }
 
+        private void Update()
+        {
+            Animate(.6f);
+        }
 
 
         public void Collect()
