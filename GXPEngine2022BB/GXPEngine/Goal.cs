@@ -7,9 +7,10 @@ namespace GXPEngine
     {
         public Action goalHit;
 
-        public Goal(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
+        public Goal(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
         {
             SetOrigin(width / 2, height / 2);
+            SetCycle(0,9);
         }
 
         public Goal() : base("colors.png", 1, 1)
@@ -26,6 +27,10 @@ namespace GXPEngine
             }
         }
 
+        private void Update()
+        {
+            Animate(.06f);
+        }
         static void GoalHit()
         {
             Console.WriteLine("win");

@@ -146,7 +146,7 @@ namespace GXPEngine
             {
                 Collectable collectable = (Collectable)other;
                 collectable.Collect();
-                collectable.LateDestroy();
+                return;
             }
             if (!(other is Goal) )
             {

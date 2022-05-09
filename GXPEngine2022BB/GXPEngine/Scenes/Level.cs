@@ -128,6 +128,14 @@ namespace GXPEngine
                     toggleForceApplier.activatable = true;
             }
 
+            foreach (GameObject obj in GetChildren())
+            {
+                if (obj is Collectable)
+                {
+                    obj.visible = true;
+                    collectablesCollected = 0;
+                }
+            }
             player.cam.canDrag = true;
         }
         

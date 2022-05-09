@@ -22,8 +22,13 @@ namespace GXPEngine
 
         public void Collect()
         {
-            Level level = (Level)SceneManager.instance.activeScene;
-            level.CollectableCollected();
+            if (visible)
+            {
+                Level level = (Level)SceneManager.instance.activeScene;
+                level.CollectableCollected();
+                visible = false; 
+            }
+
         }
     }
 }
