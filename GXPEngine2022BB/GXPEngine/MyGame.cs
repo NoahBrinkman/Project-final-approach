@@ -20,7 +20,7 @@ public class MyGame : Game
 	    MainMenuScene mainMenu = new MainMenuScene();
        // scenes.Add(mainMenu);
 		SceneManager.instance.AddScene(mainMenu);
-        Level level = new Level("TestLevel.tmx");
+        Level level = new Level("Level2.tmx");
 		SceneManager.instance.AddScene(level);
         //scenes.Add(level);
 

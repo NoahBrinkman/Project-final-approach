@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collectable.cs" />
     <Compile Include="ForceApplier.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="Scenes\TestingScene.cs" />
-    <Compile Include="Square.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="TogglableForceApplier.cs" />
   </ItemGroup>
   <ItemGroup>

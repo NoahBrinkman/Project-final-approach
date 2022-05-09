@@ -23,10 +23,11 @@ namespace GXPEngine
         
         public Action onLevelComplete;
         private string fileName;
-        private Square player;
+        private Player player;
         private Sprite background;
         private LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
+        public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
         public int GetNumberOfAppliers()
         {
@@ -82,9 +83,8 @@ namespace GXPEngine
             }
 
           
-            Square player = FindObjectOfType<Square>();
-            levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
-            
+            Player player = FindObjectOfType<Player>();
+            LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
             levelCamera.SetXY(game.width/2,game.height/2);
             AddChild(levelCamera);
             if(player != null)
@@ -104,6 +104,14 @@ namespace GXPEngine
             AddChild(overlay);
             overlay.TurnVisibility(false);
 
+            
+            List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
+            foreach (ForceApplier tForceApplier in tForceAppliers)
+            {
+                TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
+                toggleForceApplier.SetLevelCamera(levelCamera);
+            }
+            
         }
 
          void Update()
@@ -130,6 +138,14 @@ namespace GXPEngine
                     toggleForceApplier.activatable = true;
             }
 
+            foreach (GameObject obj in GetChildren())
+            {
+                if (obj is Collectable)
+                {
+                    obj.visible = true;
+                    collectablesCollected = 0;
+                }
+            }
             player.cam.canDrag = true;
         }
         
@@ -150,5 +166,12 @@ namespace GXPEngine
             overlay.TurnVisibility(true);
             player.LateDestroy();
         }
+
+
+        public void CollectableCollected()
+        {
+            collectablesCollected++;
+        }
+
     }
 }
