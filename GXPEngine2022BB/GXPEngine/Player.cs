@@ -38,10 +38,11 @@ namespace GXPEngine
 
         public Action death;
 
-        public Player(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
+        public Player(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
         {
             SetOrigin(width / 2, height / 2);
             Initialize(obj);
+            SetCycle(0, 1);
         }
 
         public Player(Vector2 pPosition, Vector2 pVelocity) : base("PH_Airplane.png", 1, 1)
@@ -72,6 +73,7 @@ namespace GXPEngine
 
         void Update()
         {
+            Animate(0.04f);
             if (_easyDraw.parent == null)
             {
                 parent.AddChild(_easyDraw);
@@ -110,6 +112,7 @@ namespace GXPEngine
                 currentScene.PlayerStartedMoving();
                 _velocity = speed;
                 charging = false;
+                SetCycle(0,8);
             }
 
             if (isMoving)
@@ -136,6 +139,7 @@ namespace GXPEngine
                 _velocity += _acceleration;
                 _velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
                 _velocity.y = Mathf.Clamp(_velocity.y, -maxSpeed, maxSpeed);
+                _velocity *= .995f;
                 _position += _velocity;
             }
             UpdateScreenPosition();

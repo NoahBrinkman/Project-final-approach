@@ -22,21 +22,21 @@
             x = Mathf.Clamp(x, boundaryLeft, boundaryRight);
             if(!canDrag) return;
             if (Input.GetMouseButtonDown(0))
-                            {
-                                //start dragging
-                                dragging = true;
-                            }
-                            if (dragging)
-                            {
-                                //set the position but clamp it between the boundaries
-                                x += savedMousePosition.x - Input.mouseX;
-                            }
-                            if (Input.GetMouseButtonUp(0))
-                            {
-                                dragging = false;
-                            }
+            {
+                //start dragging
+                dragging = true;
+            }
+            if (dragging)
+            {
+                //set the position but clamp it between the boundaries
+                x += savedMousePosition.x - Input.mouseX;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                dragging = false;
+            }
                 
-                            savedMousePosition = new Vector2(Input.mouseX, Input.mouseY);
+              savedMousePosition = new Vector2(Input.mouseX, Input.mouseY);
             }
 
         }
