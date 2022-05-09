@@ -16,7 +16,7 @@ namespace GXPEngine.Scenes
 			logo.SetXY(game.width / 2, game.height / 2 - 200);
 			logo.scale = .7f;
 			AddChild(logo);
-			 startButton = new Button("cursed_StartButton.png",OnButtonClicked);
+			 startButton = new Button("start_button_spritesheet.png",OnButtonClicked);
 			startButton.SetOrigin(startButton.width/2, startButton.height/2);
 			startButton.SetXY(game.width / 2, game.height / 2 + 200);
 			AddChild(startButton);

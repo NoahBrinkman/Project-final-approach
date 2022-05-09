@@ -25,7 +25,13 @@ namespace GXPEngine
             Console.WriteLine("LoadScene started");
             Start();
         }
-        
+
+        public virtual void Reload()
+        {
+            softUnload = false;
+            UnLoadScene();
+            LoadScene();
+        }
         /// <summary>
         /// Remove all objects from this scene (softUnload means that objects will only be disabled)
         /// </summary>

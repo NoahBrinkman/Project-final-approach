@@ -66,7 +66,10 @@ namespace GXPEngine
                 LateAddChild(activeScene);
             }
         }
-
+        public void ReloadActiveScene()
+        {
+            activeScene.Reload();
+        }
         public void LoadLastSceneInBuildIndex()
         {
             LoadScene(scenes.Count-1);
