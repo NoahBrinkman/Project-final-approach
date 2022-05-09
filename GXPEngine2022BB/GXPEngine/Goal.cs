@@ -19,7 +19,7 @@ namespace GXPEngine
 
         void OnCollision(GameObject other)
         {
-            if(other is Square)
+            if(other is Player)
             {
                 goalHit += GoalHit;
                 goalHit.Invoke();

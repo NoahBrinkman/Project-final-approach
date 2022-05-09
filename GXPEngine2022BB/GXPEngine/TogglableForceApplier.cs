@@ -18,6 +18,7 @@ namespace GXPEngine
 		{
 			Initialize(obj);
 			activatable = obj.GetBoolProperty("activatable");
+			shouldBeActivatable = obj.GetBoolProperty("activatable"); 
 			activated = obj.GetBoolProperty("activated");
 		}
 		public TogglableForceApplier(string fileName, Vector2 power, bool activatable, bool activated, float reachLeft = 0, float reachRight = 0, float reachTop = 0, float reachBottom = 0) : base(fileName, power, reachLeft,reachRight,reachTop,reachBottom)

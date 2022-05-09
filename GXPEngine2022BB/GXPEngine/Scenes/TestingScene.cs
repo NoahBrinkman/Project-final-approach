@@ -26,8 +26,8 @@ namespace GXPEngine.Scenes
         }
         public TestingScene()
 		{
-			Square square = new Square(new Vector2(0, 0), new Vector2( .5f, .5f));
-			AddChild(square);
+			Player player = new Player(new Vector2(0, 0), new Vector2( .5f, .5f));
+			AddChild(player);
 
 			forceAppliers = new List<ForceApplier>();
 			TogglableForceApplier applier = new TogglableForceApplier("triangle.png", new Vector2(0, -0.1f), true, false, 0, 0, 1000, 0);

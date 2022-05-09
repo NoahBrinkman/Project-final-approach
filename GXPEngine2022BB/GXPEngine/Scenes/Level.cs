@@ -16,9 +16,10 @@ namespace GXPEngine
   
         public Action onLevelComplete;
         private string fileName;
-        private Square player;
+        private Player player;
         private Sprite background;
         List<ForceApplier> forceAppliers;
+        public int collectablesCollected { get; private set; }
         public int GetNumberOfAppliers()
         {
             return forceAppliers.Count;
@@ -79,7 +80,7 @@ namespace GXPEngine
             }
 
           
-            Square player = FindObjectOfType<Square>();
+            Player player = FindObjectOfType<Player>();
             LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
             levelCamera.SetXY(game.width/2,game.height/2);
             AddChild(levelCamera);
@@ -144,5 +145,12 @@ namespace GXPEngine
 		{
          SceneManager.instance.TryLoadNextScene();
         }
+
+
+        public void CollectableCollected()
+        {
+            collectablesCollected++;
+        }
+
     }
 }
