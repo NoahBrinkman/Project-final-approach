@@ -129,7 +129,6 @@ namespace GXPEngine
                 if(_position.x > currentScene.GetBorders().x || _position.x < 0 || _position.y > currentScene.GetBorders().y || _position.y < 0)
                 {
                     death.Invoke();
-                    LateDestroy();
                 }
 
                 //_acceleration += new Vector2(0, _acceleration.y / 2);

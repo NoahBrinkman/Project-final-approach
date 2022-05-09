@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Xml.Xsl;
@@ -7,17 +8,24 @@ using TiledMapParser;
 
 namespace GXPEngine
 {
+    // Add canvas for overlay loss and win
+    // Only update when !isVisible
+    // OnGoal and OnDeath trigger right overlay                          
+    // go back to level selecter/go back to main menu/restart(loss) || next level(win)
+    // Make camera only follow target if it's not == to null
+
     /// <summary>
     /// A level withing the game based on an enemy map provided by tiled.
     /// Will be changed to something we can actually use
     /// </summary>
     public class Level : Scene
     {
-  
+        
         public Action onLevelComplete;
         private string fileName;
         private Square player;
         private Sprite background;
+        private LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
         public int GetNumberOfAppliers()
         {
@@ -39,13 +47,7 @@ namespace GXPEngine
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
         }
-        
-        
-        /// <summary>
-        /// 
-        /// 
-        /// 
-        /// </summary>
+
         protected override void Start()
         {
             Console.WriteLine("Start");
@@ -80,7 +82,8 @@ namespace GXPEngine
 
           
             Square player = FindObjectOfType<Square>();
-            LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
+            levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
+            
             levelCamera.SetXY(game.width/2,game.height/2);
             AddChild(levelCamera);
             if(player != null)
@@ -97,12 +100,6 @@ namespace GXPEngine
             }
         }
 
-        /// <summary>
-        /// Gets called every frame
-        /// When all enemies are out of the game. Complete the level
-        /// When hte level is considered complete. Start a timer. When this timer is complete go to the next level
-        /// When you are out of health. Tell the game to end it.
-        /// </summary>
          void Update()
         {
 
@@ -137,12 +134,18 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
-            SceneManager.instance.LoadLastSceneInBuildIndex();
-		}
+            LevelOverlay levelOverlay = new LevelOverlay(false);
+            LateAddChild(levelOverlay);
+            levelOverlay.x = levelCamera.x - game.width / 2;
+            player.LateDestroy();
+        }
 
         private void OnGoalHit()
 		{
-         SceneManager.instance.TryLoadNextScene();
+            LevelOverlay levelOverlay = new LevelOverlay(true);
+            levelOverlay.x = levelCamera.x - game.width/2;
+            LateAddChild(levelOverlay);
+            player.LateDestroy();
         }
     }
 }
