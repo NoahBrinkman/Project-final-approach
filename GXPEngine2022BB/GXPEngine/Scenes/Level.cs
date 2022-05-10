@@ -90,7 +90,6 @@ namespace GXPEngine
             if(player != null)
             {
                 this.player = player;
-                Console.WriteLine("Added playerDeath");
                 player.death += OnPlayerDeath;
                 this.player.cam = levelCamera;
             }
@@ -115,7 +114,10 @@ namespace GXPEngine
 
          void Update()
         {
-
+            if (Input.GetKeyDown(Key.D))
+            {
+                Console.WriteLine(GetChildCount());
+            }
         }
 
         public void PlayerStartedMoving()
@@ -164,6 +166,12 @@ namespace GXPEngine
             overlay.hasWon = true;
             overlay.TurnVisibility(true);
             player.LateDestroy();
+        }
+
+        public override void Reload()
+        {
+            forceAppliers = new List<ForceApplier>();
+            base.Reload();
         }
 
 

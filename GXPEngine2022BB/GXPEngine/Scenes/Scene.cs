@@ -35,26 +35,13 @@ namespace GXPEngine
         /// <summary>
         /// Remove all objects from this scene (softUnload means that objects will only be disabled)
         /// </summary>
-        public void UnLoadScene()
+        public virtual void UnLoadScene()
         {
-            if (softUnload)
-            {
-                foreach (GameObject gameObject in GetChildren())
+            foreach (GameObject gameObject in GetChildren())
                 {
                     if(gameObject != SceneManager.instance)
-                    gameObject.visible = false;
+                    gameObject.Destroy();
                 }
-            }
-            else
-            {
-                foreach (GameObject gameObject in GetChildren())
-                {
-                    if(gameObject != SceneManager.instance)
-                    gameObject.LateDestroy();
-                }
-            }
-            isActive = false;
-            visible = false;
         }
         
         protected virtual void Update()

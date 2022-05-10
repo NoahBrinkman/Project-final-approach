@@ -53,7 +53,6 @@ namespace GXPEngine
         }
         void Update()
         {
-            Console.WriteLine(x);
             if(!visible) return;
             
             if(!hasWon)
