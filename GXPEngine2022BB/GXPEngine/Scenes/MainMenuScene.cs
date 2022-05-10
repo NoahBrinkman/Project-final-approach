@@ -13,12 +13,12 @@ namespace GXPEngine.Scenes
 		{
 			Sprite bg = new Sprite("Menu_Background.png");
 			AddChild(bg);
-			Sprite logo = new Sprite("logo.png");
+			Sprite logo = new Sprite("UI/logo.png");
 			logo.SetOrigin(logo.width/2, logo.height/2);
 			logo.SetXY(game.width / 2, game.height / 2 - 200);
 			logo.scale = .5f;
 			AddChild(logo);
-			 startButton = new Button("start_button_spritesheet.png",OnButtonClicked);
+			 startButton = new Button("UI/start_button_spritesheet.png",OnButtonClicked);
 			startButton.SetOrigin(startButton.width/2, startButton.height/2);
 			startButton.SetXY(game.width / 2, game.height / 2 + 200);
 
