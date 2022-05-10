@@ -20,10 +20,18 @@ public class MyGame : Game
 	    MainMenuScene mainMenu = new MainMenuScene();
        // scenes.Add(mainMenu);
 		SceneManager.instance.AddScene(mainMenu);
-        Level level = new Level("Level2.tmx");
-		SceneManager.instance.AddScene(level);
-        //scenes.Add(level);
 
+		LevelSelectScene levelSelectScene = new LevelSelectScene();
+		SceneManager.instance.AddScene(levelSelectScene);
+		
+        Level levelOne = new Level("TestLevel.tmx");
+		SceneManager.instance.AddScene(levelOne);
+		
+		Level levelTwo = new Level("Level2.tmx");
+		SceneManager.instance.AddScene(levelTwo);
+        //scenes.Add(level);
+        Level levelThree = new Level("Level2.tmx");
+        SceneManager.instance.AddScene(levelThree);
         CongratulationsScene congratulationsScene = new CongratulationsScene();
         SceneManager.instance.AddScene(congratulationsScene);
        // scenes.Add(congratulationsScene);
