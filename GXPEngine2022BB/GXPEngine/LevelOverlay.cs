@@ -9,6 +9,7 @@ namespace GXPEngine
 {
     class LevelOverlay : GameObject
     {
+    // Show amount of stars
         EasyDraw overlay;
         public bool hasWon;
         private LevelCamera cam;
@@ -16,7 +17,10 @@ namespace GXPEngine
         private LevelButton retryButton;
         private LevelButton nextButton;
         private LevelButton backButton;
-        
+        private Sprite wonMessage;
+        private Sprite lossMessage;
+
+
         public LevelOverlay(LevelCamera camera)
         {
             hasWon = false;
@@ -37,6 +41,18 @@ namespace GXPEngine
             AddChild(backButton);
             backButton.Mirror(true,false);
             overlay.SetXY(game.width / 2- overlay.width/2, 0);
+
+            wonMessage = new Sprite("WonMessage.png", false, false);
+            wonMessage.SetOrigin(wonMessage.width / 2, wonMessage.height / 2);
+            wonMessage.SetXY(game.width / 2, wonMessage.height / 2);
+            wonMessage.scale = 0.7f;
+            AddChild(wonMessage);
+
+            lossMessage = new Sprite("LostMessage.png", false, false);
+            lossMessage.SetOrigin(lossMessage.width / 2, lossMessage.height / 2);
+            lossMessage.SetXY(game.width / 2, lossMessage.height / 2);
+            lossMessage.scale = 0.7f;
+            AddChild(lossMessage);
         }
 
         public void TurnVisibility(bool isVisible)
@@ -47,8 +63,18 @@ namespace GXPEngine
                 Vector2 position = cam.ScreenPointToGlobal((int)GetChildren()[i].x, (int)GetChildren()[i].y);
                 GetChildren()[i].SetXY(position.x,position.y);
             }
-
             visible = isVisible;
+
+            if (hasWon)
+            {
+                lossMessage.visible = false;
+            }   
+            else
+            {
+                wonMessage.visible = false;
+                nextButton.visible = false;
+            }
+                
             
         }
         void Update()
@@ -58,7 +84,7 @@ namespace GXPEngine
             if(!hasWon)
                 overlay.Clear(0,0,0,200);
             else
-                overlay.Clear(255,255,255,200);
+                overlay.Clear(100,100,100,200);
         }
 
         private void OnRetryButton()
