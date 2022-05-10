@@ -20,16 +20,7 @@ namespace GXPEngine
         private Sprite wonMessage;
         private Sprite lossMessage;
 
-        private Sprite collected1;
-        private Sprite collected2;
-        private Sprite collected3;
-
         List<Sprite> collected;
-
-        private Sprite notCollected1;
-        private Sprite notCollected2;
-        private Sprite notCollected3;
-
         List<Sprite> notCollected;
 
         public LevelOverlay(LevelCamera camera)
@@ -66,43 +57,22 @@ namespace GXPEngine
             lossMessage.scale = 0.7f;
             AddChild(lossMessage);
 
-            collected1 = new Sprite("Star.png", false, false);
-            collected1.SetOrigin(collected1.width / 2, collected1.height / 2);
-            collected1.SetXY(game.width / 2 - collected1.width, game.height / 2);
-            AddChild(collected1);
+            for (int i = 0; i < 3; i++)
+            {
+                
+                Sprite star = new Sprite("Star.png", false, false);
+                float offset = star.width + 10;
+                star.SetOrigin(star.width / 2, star.height / 2);
+                star.SetXY(game.width / 2 + (offset * i) - offset, game.height / 2);
+                AddChild(star);
+                collected.Add(star);
 
-            collected2 = new Sprite("Star.png", false, false);
-            collected2.SetOrigin(collected2.width / 2, collected2.height / 2);
-            collected2.SetXY(game.width / 2, game.height / 2);
-            AddChild(collected2);
-
-            collected3 = new Sprite("Star.png", false, false);
-            collected3.SetOrigin(collected3.width / 2, collected3.height / 2);
-            collected3.SetXY(game.width / 2 + collected3.width, game.height / 2);
-            AddChild(collected3);
-
-            collected.Add(collected1);
-            collected.Add(collected2);
-            collected.Add(collected3);
-
-            notCollected1 = new Sprite("NoStar.png", false, false);
-            notCollected1.SetOrigin(notCollected1.width / 2, notCollected1.height / 2);
-            notCollected1.SetXY(game.width / 2 - notCollected1.width, game.height / 2);
-            AddChild(notCollected1);
-
-            notCollected2 = new Sprite("NoStar.png", false, false);
-            notCollected2.SetOrigin(notCollected2.width / 2, notCollected2.height / 2);
-            notCollected2.SetXY(game.width / 2, game.height / 2);
-            AddChild(notCollected2);
-
-            notCollected3 = new Sprite("NoStar.png", false, false);
-            notCollected3.SetOrigin(notCollected3.width / 2, notCollected3.height / 2);
-            notCollected3.SetXY(game.width / 2 + notCollected3.width, game.height / 2);
-            AddChild(notCollected3);
-
-            notCollected.Add(notCollected1);
-            notCollected.Add(notCollected2);
-            notCollected.Add(notCollected3);
+                Sprite noStar = new Sprite("NoStar.png", false, false);
+                noStar.SetOrigin(noStar.width / 2, noStar.height / 2);
+                noStar.SetXY(game.width / 2 + (offset * i) - offset, game.height / 2);
+                AddChild(noStar);
+                notCollected.Add(noStar);
+            }
         }
 
         public void TurnVisibility(bool isVisible, int collectableAmount)
