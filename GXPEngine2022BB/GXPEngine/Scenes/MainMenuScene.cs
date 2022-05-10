@@ -11,14 +11,17 @@ namespace GXPEngine.Scenes
 		Button startButton;
 		public MainMenuScene()
 		{
+			Sprite bg = new Sprite("Menu_Background.png");
+			AddChild(bg);
 			Sprite logo = new Sprite("logo.png");
 			logo.SetOrigin(logo.width/2, logo.height/2);
 			logo.SetXY(game.width / 2, game.height / 2 - 200);
-			logo.scale = .7f;
+			logo.scale = .5f;
 			AddChild(logo);
-			 startButton = new Button("cursed_StartButton.png",OnButtonClicked);
+			 startButton = new Button("start_button_spritesheet.png",OnButtonClicked);
 			startButton.SetOrigin(startButton.width/2, startButton.height/2);
 			startButton.SetXY(game.width / 2, game.height / 2 + 200);
+
 			AddChild(startButton);
 		}
 		private void OnButtonClicked()

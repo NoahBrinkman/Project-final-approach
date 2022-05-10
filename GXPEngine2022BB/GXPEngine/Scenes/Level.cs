@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Xml.Xsl;
@@ -7,19 +8,27 @@ using TiledMapParser;
 
 namespace GXPEngine
 {
+    // Add canvas for overlay loss and win
+    // Only update when !isVisible
+    // OnGoal and OnDeath trigger right overlay                          
+    // go back to level selecter/go back to main menu/restart(loss) || next level(win)
+    // Make camera only follow target if it's not == to null
+
     /// <summary>
     /// A level withing the game based on an enemy map provided by tiled.
     /// Will be changed to something we can actually use
     /// </summary>
     public class Level : Scene
     {
-  
+        
         public Action onLevelComplete;
         private string fileName;
         private Player player;
         private Sprite background;
+        public LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
         public int collectablesCollected { get; private set; }
+        private LevelOverlay overlay;
         public int GetNumberOfAppliers()
         {
             return forceAppliers.Count;
@@ -40,13 +49,7 @@ namespace GXPEngine
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
         }
-        
-        
-        /// <summary>
-        /// 
-        /// 
-        /// 
-        /// </summary>
+
         protected override void Start()
         {
             Console.WriteLine("Start");
@@ -87,7 +90,6 @@ namespace GXPEngine
             if(player != null)
             {
                 this.player = player;
-                Console.WriteLine("Added playerDeath");
                 player.death += OnPlayerDeath;
                 this.player.cam = levelCamera;
             }
@@ -96,7 +98,11 @@ namespace GXPEngine
 			{
                 goal.goalHit += OnGoalHit;
             }
-            
+
+            overlay = new LevelOverlay(levelCamera);
+            AddChild(overlay);
+            overlay.TurnVisibility(false, 0);
+
             List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
             foreach (ForceApplier tForceApplier in tForceAppliers)
             {
@@ -106,15 +112,12 @@ namespace GXPEngine
             
         }
 
-        /// <summary>
-        /// Gets called every frame
-        /// When all enemies are out of the game. Complete the level
-        /// When hte level is considered complete. Start a timer. When this timer is complete go to the next level
-        /// When you are out of health. Tell the game to end it.
-        /// </summary>
          void Update()
         {
-
+            if (Input.GetKeyDown(Key.D))
+            {
+                Console.WriteLine(GetChildCount());
+            }
         }
 
         public void PlayerStartedMoving()
@@ -154,12 +157,22 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
-            SceneManager.instance.LoadLastSceneInBuildIndex();
-		}
+            overlay.TurnVisibility(true, collectablesCollected);
+            player.LateDestroy();
+        }
 
         private void OnGoalHit()
-		{
-         SceneManager.instance.TryLoadNextScene();
+        {
+            overlay.hasWon = true;
+            overlay.TurnVisibility(true, collectablesCollected);
+            player.LateDestroy();
+        }
+
+        public override void Reload()
+        {
+            forceAppliers = new List<ForceApplier>();
+            collectablesCollected = 0;
+            base.Reload();
         }
 
 
