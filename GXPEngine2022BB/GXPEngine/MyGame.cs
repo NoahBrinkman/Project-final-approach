@@ -30,7 +30,7 @@ public class MyGame : Game
 		Level levelTwo = new Level("Levels/Level2.tmx");
 		SceneManager.instance.AddScene(levelTwo);
         //scenes.Add(level);
-        Level levelThree = new Level("Levels/Level2.tmx");
+        Level levelThree = new Level("Levels/Level3.tmx");
         SceneManager.instance.AddScene(levelThree);
         CongratulationsScene congratulationsScene = new CongratulationsScene();
         SceneManager.instance.AddScene(congratulationsScene);
