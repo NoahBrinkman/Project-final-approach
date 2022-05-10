@@ -14,19 +14,15 @@ namespace GXPEngine
 		public bool activatable = true;
 		public bool activated = false;
 		private LevelCamera camera;
-		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base(fileName,new Vector2(), 0, 0, 0, 0)
+		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base( obj)
 		{
 			Initialize(obj);
+			Console.WriteLine(this._frames);
 			activatable = obj.GetBoolProperty("activatable");
 			shouldBeActivatable = obj.GetBoolProperty("activatable"); 
 			activated = obj.GetBoolProperty("activated");
 		}
-		public TogglableForceApplier(string fileName, Vector2 power, bool activatable, bool activated, float reachLeft = 0, float reachRight = 0, float reachTop = 0, float reachBottom = 0) : base(fileName, power, reachLeft,reachRight,reachTop,reachBottom)
-		{
-			this.activatable = activatable;
-			shouldBeActivatable = activatable;
-			this.activated = activated;
-		}
+
 
 		public void SetLevelCamera(LevelCamera cam)
 		{
@@ -46,12 +42,19 @@ namespace GXPEngine
 
 			//TEMP REMOVE LATER FOR SPRITE SWITCH
 			if (activated)
-				SetColor(0, 255, 0);
+			{
+				SetCycle(1, base.frameTotal -1);
+				Animate(.1f);
+			}
 			else
-				SetColor(255, 255, 255);
+			{
+				SetCycle(0,1);
+			}
+
 		}
 		void OnClicked()
 		{
+			Console.WriteLine(_frames);
 			activated = !activated;
 		}
 		public override bool IsInHorizontalReach(GameObject other, float width, float height)

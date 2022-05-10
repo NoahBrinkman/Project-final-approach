@@ -74,7 +74,7 @@ namespace GXPEngine
                         forceAppliers.Add(forceApplier);
 					}
 
-                    if(children[i].name == "PH_BackgroundDouble.png")
+                    if(children[i].name.Contains("Background"))
                     {
                         background = (Sprite)children[i];
                     }

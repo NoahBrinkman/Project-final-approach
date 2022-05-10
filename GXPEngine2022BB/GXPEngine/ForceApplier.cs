@@ -14,21 +14,15 @@ namespace GXPEngine
         public float reachTop = 0;
         public float reachBottom = 0;
         public Vector2 force;
+        public int frameTotal;
 
-        public ForceApplier(string fileName, int rows, int cols, TiledObject obj=null) : base("triangle.png", 1, 1)
+        public ForceApplier(TiledObject obj=null) : 
+            base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
 		{
-            Initialize(obj);
-		}
 
-        public ForceApplier(string fileName, Vector2 power,float reachLeft = 0, float reachRight = 0, float reachTop = 0, float reachBottom = 0, TiledObject obj = null) : base(fileName,1,1)
-        {
-            SetOrigin(width/2,height/2);
-            this.reachBottom = reachBottom;
-            this.reachLeft = reachLeft; 
-            this.reachRight = reachRight;   
-            this.reachTop = reachTop;
-            this.force = power; 
+            Initialize(obj);
         }
+        
 
         public virtual void Initialize(TiledObject obj)
 		{
@@ -38,6 +32,8 @@ namespace GXPEngine
             this.reachRight = obj.GetFloatProperty("reachRight");
             this.reachTop = obj.GetFloatProperty("reachTop");
             this.force = new Vector2(obj.GetFloatProperty("powerX"), obj.GetFloatProperty("powerY"));
+            this.frameTotal = obj.GetIntProperty("frames");
+            SetCycle(0,frameCount);
         }
 
         public  virtual bool IsInHorizontalReach(GameObject other, float otherWidth, float otherHeight)

@@ -41,26 +41,32 @@
    <properties>
     <property name="activatable" type="bool" value="false"/>
     <property name="activated" type="bool" value="true"/>
+    <property name="cols" type="int" value="1"/>
     <property name="fileName" value="PH_FanUp.png"/>
+    <property name="frames" type="int" value="1"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="-0.3"/>
     <property name="reachBottom" type="float" value="0"/>
     <property name="reachLeft" type="float" value="0"/>
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="10000"/>
+    <property name="rows" type="int" value="1"/>
    </properties>
   </object>
   <object id="322" type="GXPEngine.TogglableForceApplier" gid="6" x="836" y="82.6667" width="284.644" height="81.1966">
    <properties>
     <property name="activatable" type="bool" value="true"/>
     <property name="activated" type="bool" value="false"/>
-    <property name="fileName" value="triangle.png"/>
+    <property name="cols" type="int" value="1"/>
+    <property name="fileName" value="PH_CeilingFan.png"/>
+    <property name="frames" type="int" value="1"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="0.2"/>
     <property name="reachBottom" type="float" value="10000"/>
     <property name="reachLeft" type="float" value="0"/>
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="0"/>
+    <property name="rows" type="int" value="1"/>
    </properties>
   </object>
   <object id="330" type="GXPEngine.Goal" gid="8" x="1218" y="514" width="64" height="64">
