@@ -11,7 +11,7 @@ namespace GXPEngine.Scenes
 		Button startButton;
 		public MainMenuScene()
 		{
-			Sprite bg = new Sprite("Menu_Background.png");
+			Sprite bg = new Sprite("Backgrounds/Menu_Background.png");
 			AddChild(bg);
 			Sprite logo = new Sprite("UI/logo.png");
 			logo.SetOrigin(logo.width/2, logo.height/2);

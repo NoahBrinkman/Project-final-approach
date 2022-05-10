@@ -24,13 +24,13 @@ public class MyGame : Game
 		LevelSelectScene levelSelectScene = new LevelSelectScene();
 		SceneManager.instance.AddScene(levelSelectScene);
 		
-        Level levelOne = new Level("TestLevel.tmx");
+        Level levelOne = new Level("Levels/TestLevel.tmx");
 		SceneManager.instance.AddScene(levelOne);
 		
-		Level levelTwo = new Level("Level2.tmx");
+		Level levelTwo = new Level("Levels/Level2.tmx");
 		SceneManager.instance.AddScene(levelTwo);
         //scenes.Add(level);
-        Level levelThree = new Level("Level2.tmx");
+        Level levelThree = new Level("Levels/Level2.tmx");
         SceneManager.instance.AddScene(levelThree);
         CongratulationsScene congratulationsScene = new CongratulationsScene();
         SceneManager.instance.AddScene(congratulationsScene);

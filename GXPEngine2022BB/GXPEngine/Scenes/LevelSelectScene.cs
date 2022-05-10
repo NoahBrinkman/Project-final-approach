@@ -5,7 +5,7 @@
 
         public LevelSelectScene() : base()
         {
-            Sprite bg = new Sprite("Menu_Background.png");
+            Sprite bg = new Sprite("Backgrounds/Menu_Background.png");
             AddChild(bg);
             Sprite selectLevelText = new Sprite("UI/SelectLevelText.png");
             selectLevelText.SetOrigin(selectLevelText.width/2,selectLevelText.height/2);

@@ -60,14 +60,14 @@ namespace GXPEngine
             for (int i = 0; i < 3; i++)
             {
                 
-                Sprite star = new Sprite("Star.png", false, false);
+                Sprite star = new Sprite("UI/Star.png", false, false);
                 float offset = star.width + 10;
                 star.SetOrigin(star.width / 2, star.height / 2);
                 star.SetXY(game.width / 2 + (offset * i) - offset, game.height / 2);
                 AddChild(star);
                 collected.Add(star);
 
-                Sprite noStar = new Sprite("NoStar.png", false, false);
+                Sprite noStar = new Sprite("UI/NoStar.png", false, false);
                 noStar.SetOrigin(noStar.width / 2, noStar.height / 2);
                 noStar.SetXY(game.width / 2 + (offset * i) - offset, game.height / 2);
                 AddChild(noStar);

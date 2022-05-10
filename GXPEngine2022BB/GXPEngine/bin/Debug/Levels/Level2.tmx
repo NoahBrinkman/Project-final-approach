@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="21" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="347">
  <tileset firstgid="1" name="triangle" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="triangle.png" width="64" height="64"/>
+  <image source="../GXPAssets/triangle.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="2" name="square" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="square.png" width="64" height="64"/>
+  <image source="../GXPAssets/square.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="3" name="colors" tilewidth="64" tileheight="64" tilecount="1" columns="1">
-  <image source="colors.png" width="64" height="64"/>
+  <image source="../GXPAssets/colors.png" width="64" height="64"/>
  </tileset>
  <tileset firstgid="4" name="PH_Airplane" tilewidth="106" tileheight="52" tilecount="1" columns="1">
-  <image source="PH_Airplane.png" width="106" height="52"/>
+  <image source="../InGameAssets/PH_Airplane.png" width="106" height="52"/>
  </tileset>
  <tileset firstgid="5" name="PH_FanUp" tilewidth="410" tileheight="589" tilecount="1" columns="1">
-  <image source="PH_FanUp.png" width="410" height="589"/>
+  <image source="../InGameAssets/PH_FanUp.png" width="410" height="589"/>
  </tileset>
  <tileset firstgid="6" name="PH_CeilingFan" tilewidth="624" tileheight="178" tilecount="1" columns="1">
-  <image source="PH_CeilingFan.png" width="624" height="178"/>
+  <image source="../InGameAssets/PH_CeilingFan.png" width="624" height="178"/>
  </tileset>
  <tileset firstgid="7" name="PH_Heart" tilewidth="557" tileheight="438" tilecount="1" columns="1">
-  <image source="PH_Heart.png" width="557" height="438"/>
+  <image source="../InGameAssets/PH_Heart.png" width="557" height="438"/>
  </tileset>
  <tileset firstgid="8" name="heart_spritesheet" tilewidth="64" tileheight="64" tilecount="12" columns="4">
-  <image source="heart_spritesheet.png" width="256" height="192"/>
+  <image source="../InGameAssets/heart_spritesheet.png" width="256" height="192"/>
  </tileset>
  <tileset firstgid="20" name="paper_airplane_spritesheet" tilewidth="128" tileheight="128" tilecount="32" columns="8">
-  <image source="paper_airplane_spritesheet.png" width="1024" height="512"/>
+  <image source="../InGameAssets/paper_airplane_spritesheet.png" width="1024" height="512"/>
  </tileset>
  <tileset firstgid="52" name="star_spritesheet" tilewidth="64" tileheight="64" tilecount="8" columns="4">
-  <image source="star_spritesheet.png" width="256" height="128"/>
+  <image source="../InGameAssets/star_spritesheet.png" width="256" height="128"/>
  </tileset>
  <tileset firstgid="60" name="fire_spritesheet" tilewidth="64" tileheight="128" tilecount="12" columns="4">
-  <image source="fire_spritesheet.png" width="256" height="384"/>
+  <image source="../InGameAssets/fire_spritesheet.png" width="256" height="384"/>
  </tileset>
  <imagelayer id="3" name="background">
-  <image source="Lab_Background.png" width="2732" height="768"/>
+  <image source="../Backgrounds/Lab_Background.png" width="2732" height="768"/>
   <properties>
    <property name="fileName" value="PH_BackgroundDouble.png"/>
   </properties>
@@ -45,7 +45,7 @@
     <property name="activatable" type="bool" value="true"/>
     <property name="activated" type="bool" value="false"/>
     <property name="cols" type="int" value="1"/>
-    <property name="fileName" value="PH_CeilingFan.png"/>
+    <property name="fileName" value="InGameAssets/PH_CeilingFan.png"/>
     <property name="frames" type="int" value="1"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="0.2"/>
@@ -59,35 +59,35 @@
   <object id="330" type="GXPEngine.Goal" gid="8" x="2500" y="512" width="64" height="64">
    <properties>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="heart_spritesheet.png"/>
+    <property name="fileName" value="InGameAssets/heart_spritesheet.png"/>
     <property name="rows" type="int" value="3"/>
    </properties>
   </object>
   <object id="331" type="GXPEngine.Player" gid="20" x="194.667" y="402" width="75" height="75">
    <properties>
     <property name="cols" type="int" value="8"/>
-    <property name="fileName" value="paper_airplane_spritesheet.png"/>
+    <property name="fileName" value="InGameAssets/paper_airplane_spritesheet.png"/>
     <property name="rows" type="int" value="4"/>
    </properties>
   </object>
   <object id="337" type="GXPEngine.Collectable" gid="52" x="384" y="336" width="64" height="64">
    <properties>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="star_SpriteSheet.png"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
     <property name="rows" type="int" value="2"/>
    </properties>
   </object>
   <object id="339" type="GXPEngine.Collectable" gid="52" x="1254" y="326" width="64" height="64">
    <properties>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="star_SpriteSheet.png"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
     <property name="rows" type="int" value="2"/>
    </properties>
   </object>
   <object id="340" type="GXPEngine.Collectable" gid="52" x="2162" y="506" width="64" height="64">
    <properties>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="star_SpriteSheet.png"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
     <property name="rows" type="int" value="2"/>
    </properties>
   </object>
@@ -96,7 +96,7 @@
     <property name="activatable" type="bool" value="true"/>
     <property name="activated" type="bool" value="false"/>
     <property name="cols" type="int" value="1"/>
-    <property name="fileName" value="PH_FanUp.png"/>
+    <property name="fileName" value="InGameAssets/PH_FanUp.png"/>
     <property name="frames" type="int" value="1"/>
     <property name="powerX" type="float" value="0.6"/>
     <property name="powerY" type="float" value="-0.03"/>
@@ -112,7 +112,7 @@
     <property name="activatable" type="bool" value="false"/>
     <property name="activated" type="bool" value="true"/>
     <property name="cols" type="int" value="1"/>
-    <property name="fileName" value="PH_CeilingFan.png"/>
+    <property name="fileName" value="InGameAssets/PH_CeilingFan.png"/>
     <property name="frames" type="int" value="1"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="1"/>
@@ -128,7 +128,7 @@
     <property name="activatable" type="bool" value="false"/>
     <property name="activated" type="bool" value="true"/>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="fire_spritesheet.png"/>
+    <property name="fileName" value="InGameAssets/fire_spritesheet.png"/>
     <property name="frames" type="int" value="12"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="-0.15"/>
@@ -144,7 +144,7 @@
     <property name="activatable" type="bool" value="true"/>
     <property name="activated" type="bool" value="false"/>
     <property name="cols" type="int" value="4"/>
-    <property name="fileName" value="fire_spritesheet.png"/>
+    <property name="fileName" value="InGameAssets/fire_spritesheet.png"/>
     <property name="frames" type="int" value="12"/>
     <property name="powerX" type="float" value="0"/>
     <property name="powerY" type="float" value="-0.4"/>
