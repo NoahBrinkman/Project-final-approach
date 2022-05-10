@@ -87,35 +87,40 @@ namespace GXPEngine
                 Level currentScene = (Level)SceneManager.instance.activeScene;
                 currentScene.PlayerStoppedMoving();
 			}
-            if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
-            {
-                _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
-                charging = true;
-                cam.canDrag = false;
-            }
-            _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
-            Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
-            Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) * (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
-            if (charging)
-			{
-                Vector2 projection = _position;
-                Vector2 simulatedSpeed = speed;
-                for(int i = 2; i <= 16; i += 2)
-				{
-                    simulatedSpeed += _acceleration * i;
-                    projection += simulatedSpeed * i;
-                    _easyDraw.Ellipse(projection.x,projection.y, 10 - (i/2), 10 -(i / 2));
-				}
-			}
-            if (Input.GetMouseButtonUp(0) && charging)
-            {
-                Level currentScene = (Level)SceneManager.instance.activeScene;
-                currentScene.PlayerStartedMoving();
-                _velocity = speed;
-                charging = false;
-                SetCycle(0,8);
-            }
 
+                
+            float mouseX = cam.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
+            if(Input.GetMouseButtonDown(0) && (mouseX  > (x ) - width/2 && mouseX < (x) + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
+                {
+                    _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
+                    charging = true;
+                    cam.canDrag = false;
+                }
+
+                _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
+                Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
+                Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) *
+                                (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
+                if (charging)
+                {
+                    Vector2 projection = _position;
+                    Vector2 simulatedSpeed = speed;
+                    for (int i = 2; i <= 16; i += 2)
+                    {
+                        simulatedSpeed += _acceleration * i;
+                        projection += simulatedSpeed * i;
+                        _easyDraw.Ellipse(projection.x, projection.y, 10 - (i / 2), 10 - (i / 2));
+                    }
+                }
+
+                if (Input.GetMouseButtonUp(0) && charging)
+                {
+                    Level currentScene = (Level)SceneManager.instance.activeScene;
+                    currentScene.PlayerStartedMoving();
+                    _velocity = speed;
+                    charging = false;
+                    SetCycle(0, 8);
+                }
             if (isMoving)
             {
                 //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
