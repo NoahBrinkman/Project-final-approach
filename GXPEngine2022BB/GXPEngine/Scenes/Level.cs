@@ -101,7 +101,7 @@ namespace GXPEngine
 
             overlay = new LevelOverlay(levelCamera);
             AddChild(overlay);
-            overlay.TurnVisibility(false);
+            overlay.TurnVisibility(false, 0);
 
             List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
             foreach (ForceApplier tForceApplier in tForceAppliers)
@@ -157,20 +157,21 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
-            overlay.TurnVisibility(true);
+            overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
         }
 
         private void OnGoalHit()
         {
             overlay.hasWon = true;
-            overlay.TurnVisibility(true);
+            overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
         }
 
         public override void Reload()
         {
             forceAppliers = new List<ForceApplier>();
+            collectablesCollected = 0;
             base.Reload();
         }
 

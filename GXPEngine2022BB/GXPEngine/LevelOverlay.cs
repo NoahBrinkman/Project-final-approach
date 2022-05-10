@@ -20,9 +20,23 @@ namespace GXPEngine
         private Sprite wonMessage;
         private Sprite lossMessage;
 
+        private Sprite collected1;
+        private Sprite collected2;
+        private Sprite collected3;
+
+        List<Sprite> collected;
+
+        private Sprite notCollected1;
+        private Sprite notCollected2;
+        private Sprite notCollected3;
+
+        List<Sprite> notCollected;
 
         public LevelOverlay(LevelCamera camera)
         {
+            collected = new List<Sprite>();
+            notCollected = new List<Sprite>();
+
             hasWon = false;
             cam = camera;
             overlay = new EasyDraw(game.width / 2, game.height, false);
@@ -41,21 +55,57 @@ namespace GXPEngine
             AddChild(backButton);
             backButton.Mirror(true,false);
             overlay.SetXY(game.width / 2- overlay.width/2, 0);
-
             wonMessage = new Sprite("WonMessage.png", false, false);
             wonMessage.SetOrigin(wonMessage.width / 2, wonMessage.height / 2);
             wonMessage.SetXY(game.width / 2, wonMessage.height / 2);
             wonMessage.scale = 0.7f;
             AddChild(wonMessage);
-
             lossMessage = new Sprite("LostMessage.png", false, false);
             lossMessage.SetOrigin(lossMessage.width / 2, lossMessage.height / 2);
             lossMessage.SetXY(game.width / 2, lossMessage.height / 2);
             lossMessage.scale = 0.7f;
             AddChild(lossMessage);
+
+            collected1 = new Sprite("Star.png", false, false);
+            collected1.SetOrigin(collected1.width / 2, collected1.height / 2);
+            collected1.SetXY(game.width / 2 - collected1.width, game.height / 2);
+            AddChild(collected1);
+
+            collected2 = new Sprite("Star.png", false, false);
+            collected2.SetOrigin(collected2.width / 2, collected2.height / 2);
+            collected2.SetXY(game.width / 2, game.height / 2);
+            AddChild(collected2);
+
+            collected3 = new Sprite("Star.png", false, false);
+            collected3.SetOrigin(collected3.width / 2, collected3.height / 2);
+            collected3.SetXY(game.width / 2 + collected3.width, game.height / 2);
+            AddChild(collected3);
+
+            collected.Add(collected1);
+            collected.Add(collected2);
+            collected.Add(collected3);
+
+            notCollected1 = new Sprite("NoStar.png", false, false);
+            notCollected1.SetOrigin(notCollected1.width / 2, notCollected1.height / 2);
+            notCollected1.SetXY(game.width / 2 - notCollected1.width, game.height / 2);
+            AddChild(notCollected1);
+
+            notCollected2 = new Sprite("NoStar.png", false, false);
+            notCollected2.SetOrigin(notCollected2.width / 2, notCollected2.height / 2);
+            notCollected2.SetXY(game.width / 2, game.height / 2);
+            AddChild(notCollected2);
+
+            notCollected3 = new Sprite("NoStar.png", false, false);
+            notCollected3.SetOrigin(notCollected3.width / 2, notCollected3.height / 2);
+            notCollected3.SetXY(game.width / 2 + notCollected3.width, game.height / 2);
+            AddChild(notCollected3);
+
+            notCollected.Add(notCollected1);
+            notCollected.Add(notCollected2);
+            notCollected.Add(notCollected3);
         }
 
-        public void TurnVisibility(bool isVisible)
+        public void TurnVisibility(bool isVisible, int collectableAmount)
         {
             for (int i = 0; i < GetChildCount(); i++)
             {
@@ -74,9 +124,14 @@ namespace GXPEngine
                 wonMessage.visible = false;
                 nextButton.visible = false;
             }
-                
-            
+            collected.ForEach(x => x.visible = false);
+            for (int i = 0; i < collectableAmount; i++)
+            {
+                Console.WriteLine("hi");
+                collected[i].visible = true;
+            }
         }
+
         void Update()
         {
             if(!visible) return;
