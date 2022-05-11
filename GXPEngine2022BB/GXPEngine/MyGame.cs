@@ -7,17 +7,22 @@ public class MyGame : Game
 {
 
     private List<GameObject> scenes = new List<GameObject>();
-
+    Sound music;
+    SoundChannel musicChannel;
     public MyGame() : base(1344, 768, false)
     {
         /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);
         SeneManager.instance.LoadScene(scene);*/
+        music = new Sound("Sound/BackgroundMusic.mp3", true, true);
+        musicChannel = music.Play();
+        musicChannel.Volume = 0.3f;
+
         LoadGame();
     }
     void LoadGame()
     {
-	    MainMenuScene mainMenu = new MainMenuScene();
+        MainMenuScene mainMenu = new MainMenuScene();
        // scenes.Add(mainMenu);
 		SceneManager.instance.AddScene(mainMenu);
 

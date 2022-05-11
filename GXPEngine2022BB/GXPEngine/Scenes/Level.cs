@@ -27,6 +27,8 @@ namespace GXPEngine
         private Sprite background;
         public LevelCamera levelCamera;
         List<ForceApplier> forceAppliers;
+        private Sound wonSound;
+        private Sound lostSound;
         public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
         public int GetNumberOfAppliers()
@@ -52,6 +54,8 @@ namespace GXPEngine
 
         protected override void Start()
         {
+            lostSound = new Sound("Sound/LevelLost.wav", false, false);
+            wonSound = new Sound("Sound/LevelWon.wav",false, false);
             Console.WriteLine("Start");
             visible = true;
             if (fileName != "")
@@ -157,12 +161,14 @@ namespace GXPEngine
 
         public void OnPlayerDeath()
 		{
+            lostSound.Play();
             overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
         }
 
         private void OnGoalHit()
         {
+            wonSound.Play();
             overlay.hasWon = true;
             overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
