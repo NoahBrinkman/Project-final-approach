@@ -15,7 +15,7 @@ namespace GXPEngine
 
         void Update()
         {
-            Animate(0.0025f);
+            Animate(0.0035f);
             if(currentFrame == 5)
                 LateDestroy();
         }
