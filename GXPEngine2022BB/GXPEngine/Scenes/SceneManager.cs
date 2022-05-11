@@ -65,6 +65,12 @@ namespace GXPEngine
                 activeScene.LoadScene();
                 LateAddChild(activeScene);
             }
+
+            if(buildIndex == 2)
+            {
+                Comic comic = new Comic();
+                LateAddChild(comic);
+            }
         }
         public void ReloadActiveScene()
         {

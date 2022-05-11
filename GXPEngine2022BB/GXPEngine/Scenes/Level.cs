@@ -78,7 +78,7 @@ namespace GXPEngine
                     {
                         background = (Sprite)children[i];
                     }
-                    
+   
 				}
             }
 
@@ -109,7 +109,6 @@ namespace GXPEngine
                 TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
                 toggleForceApplier.SetLevelCamera(levelCamera);
             }
-            
         }
 
          void Update()
