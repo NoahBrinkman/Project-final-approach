@@ -105,7 +105,7 @@ namespace GXPEngine
         void Update()
         {
             if(!visible) return;
-            overlay.Clear(0,0,0,200);
+            overlay.Clear(158,131,205,200);
         }
 
         private void OnRetryButton()
