@@ -13,6 +13,7 @@ namespace GXPEngine.Scenes
 		{
 			Sprite bg = new Sprite("Backgrounds/Menu_Background.png");
 			AddChild(bg);
+			bg.scale = 1.05f;
 			Sprite logo = new Sprite("UI/logo.png");
 			logo.SetOrigin(logo.width/2, logo.height/2);
 			logo.SetXY(game.width / 2, game.height / 2 - 200);
