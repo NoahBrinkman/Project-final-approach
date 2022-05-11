@@ -9,7 +9,7 @@ public class MyGame : Game
     private List<GameObject> scenes = new List<GameObject>();
     Sound music;
     SoundChannel musicChannel;
-    public MyGame() : base(1344, 768, false)
+    public MyGame() : base(1366, 768, false)
     {
         /*TestingScene scene = new TestingScene();
         SceneManager.instance.AddScene(scene);

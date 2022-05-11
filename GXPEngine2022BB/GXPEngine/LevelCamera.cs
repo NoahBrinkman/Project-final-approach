@@ -8,7 +8,7 @@
         private Vector2 savedMousePosition;
         public bool canDrag = true;
         private Player target;
-        public LevelCamera(float boundaryLeft, float boundaryRight, Player target) : base(0, 0, 1344, 768)
+        public LevelCamera(float boundaryLeft, float boundaryRight, Player target) : base(0, 0, 1366, 768)
         {
             this.boundaryLeft = boundaryLeft;
             this.boundaryRight = boundaryRight;
