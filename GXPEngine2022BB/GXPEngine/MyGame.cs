@@ -24,7 +24,7 @@ public class MyGame : Game
 		LevelSelectScene levelSelectScene = new LevelSelectScene();
 		SceneManager.instance.AddScene(levelSelectScene);
 		
-        Level levelOne = new Level("Levels/TestLevel.tmx");
+        Level levelOne = new Level("Levels/Level1.tmx");
 		SceneManager.instance.AddScene(levelOne);
 		
 		Level levelTwo = new Level("Levels/Level2.tmx");
