@@ -39,9 +39,9 @@ namespace GXPEngine
 					OnClicked();
 				}
 			}
-			else
+			if(!shouldBeActivatable)
 			{
-				SetColor(.9f,.9f,.9f);
+				SetColor(.8f,.8f,.8f);
 			}
 
 			//TEMP REMOVE LATER FOR SPRITE SWITCH
