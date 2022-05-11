@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collectable.cs" />
+    <Compile Include="Comic.cs" />
     <Compile Include="ForceApplier.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />

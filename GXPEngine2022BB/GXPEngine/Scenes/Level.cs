@@ -109,7 +109,12 @@ namespace GXPEngine
                 TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
                 toggleForceApplier.SetLevelCamera(levelCamera);
             }
-            
+
+            if(fileName == "Levels/Level1.tmx")
+            {
+                Comic comic = new Comic();
+                AddChild(comic);
+            }
         }
 
          void Update()
