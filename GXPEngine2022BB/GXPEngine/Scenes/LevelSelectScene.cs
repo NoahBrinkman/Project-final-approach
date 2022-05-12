@@ -7,6 +7,7 @@
         {
             Sprite bg = new Sprite("Backgrounds/Menu_Background.png");
             AddChild(bg);
+            bg.scale = 1.02f;
             Sprite selectLevelText = new Sprite("UI/SelectLevelText.png");
             selectLevelText.SetOrigin(selectLevelText.width/2,selectLevelText.height/2);
             selectLevelText.SetXY(game.width/2, 100);
