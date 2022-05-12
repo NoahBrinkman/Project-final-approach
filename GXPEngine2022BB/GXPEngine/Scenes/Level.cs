@@ -20,7 +20,7 @@ namespace GXPEngine
     /// </summary>
     public class Level : Scene
     {
-        
+
         public Action onLevelComplete;
         private string fileName;
         private Player player;
@@ -29,6 +29,8 @@ namespace GXPEngine
         List<ForceApplier> forceAppliers;
         private Sound wonSound;
         private Sound lostSound;
+        private float timer;
+        private bool startTimer;
         public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
         public int GetNumberOfAppliers()
@@ -46,7 +48,7 @@ namespace GXPEngine
                 return null;
             }
         }
-        public Level( string fileName = "") : base(true)
+        public Level(string fileName = "") : base(true)
         {
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
@@ -55,7 +57,7 @@ namespace GXPEngine
         protected override void Start()
         {
             lostSound = new Sound("Sound/LevelLost.wav", false, false);
-            wonSound = new Sound("Sound/LevelWon.wav",false, false);
+            wonSound = new Sound("Sound/LevelWon.wav", false, false);
             Console.WriteLine("Start");
             visible = true;
             if (fileName != "")
@@ -70,36 +72,36 @@ namespace GXPEngine
                 levelMap.LoadObjectGroups();
 
                 List<GameObject> children = GetChildren();
-				for (int i = 0; i < children.Count; i++)
-				{
-                    if(children[i] is ForceApplier)
-					{
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i] is ForceApplier)
+                    {
                         ForceApplier forceApplier = (ForceApplier)children[i];
                         forceAppliers.Add(forceApplier);
-					}
+                    }
 
-                    if(children[i].name.Contains("Background"))
+                    if (children[i].name.Contains("Background"))
                     {
                         background = (Sprite)children[i];
                     }
-   
-				}
+
+                }
             }
 
-          
+
             Player player = FindObjectOfType<Player>();
-            LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
-            levelCamera.SetXY(game.width/2,game.height/2);
+            LevelCamera levelCamera = new LevelCamera(game.width / 2, background.width - game.width / 2, player);
+            levelCamera.SetXY(game.width / 2, game.height / 2);
             AddChild(levelCamera);
-            if(player != null)
+            if (player != null)
             {
                 this.player = player;
                 player.death += OnPlayerDeath;
                 this.player.cam = levelCamera;
             }
-            Goal goal = FindObjectOfType<Goal>(); 
-            if(goal != null)
-			{
+            Goal goal = FindObjectOfType<Goal>();
+            if (goal != null)
+            {
                 goal.goalHit += OnGoalHit;
             }
 
@@ -115,12 +117,22 @@ namespace GXPEngine
             }
         }
 
-         void Update()
+        void Update()
         {
             if (Input.GetKeyDown(Key.D))
             {
                 Console.WriteLine(GetChildCount());
             }
+
+            if (startTimer)
+            {
+                timer -= (float)Time.deltaTime / 1000;
+                if (timer < 0)
+                {
+                    EndLevel();
+                }
+            }
+
         }
 
         public void PlayerStartedMoving()
@@ -138,7 +150,7 @@ namespace GXPEngine
             foreach (ForceApplier tForceApplier in tForceAppliers)
             {
                 TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
-                if(toggleForceApplier.shouldBeActivatable)
+                if (toggleForceApplier.shouldBeActivatable)
                     toggleForceApplier.activatable = true;
             }
 
@@ -152,25 +164,38 @@ namespace GXPEngine
             }
             player.cam.canDrag = true;
         }
-        
+
         public Vector2 GetBorders()
         {
-            return(new Vector2(background.width, background.height));
+            return (new Vector2(background.width, background.height));
         }
 
         public void OnPlayerDeath()
-		{
+        {
+            player.StopSimulating();
             lostSound.Play();
-            overlay.TurnVisibility(true, collectablesCollected);
-            player.LateDestroy();
+            Timer(1, true);
         }
 
         private void OnGoalHit()
         {
+            player.StopSimulating();
             wonSound.Play();
             overlay.hasWon = true;
+            Timer(1, true);
+        }
+
+        private void EndLevel()
+        {
+            Timer(0, false);
             overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
+        }
+
+        private void Timer(float amount, bool state)
+        {
+            timer = amount;
+            startTimer = state;
         }
 
         public override void Reload()

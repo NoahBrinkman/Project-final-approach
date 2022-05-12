@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GXPEngine;
 using GXPEngine.Core;
 using GXPEngine.Scenes;
@@ -162,12 +162,17 @@ namespace GXPEngine
             {
 				if (isMoving)
 				{
-                    //death += Death;
                     if(death != null)
                         death.Invoke();
 				}
               
             }
+        }
+
+        public void StopSimulating()
+        {
+            _acceleration = new Vector2(0,1);
+            _velocity = new Vector2(0,1);
         }
 
         static void Death()
