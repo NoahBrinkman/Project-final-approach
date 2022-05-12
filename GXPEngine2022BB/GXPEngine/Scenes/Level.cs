@@ -26,7 +26,7 @@ namespace GXPEngine
         private Player player;
         private Sprite background;
         public LevelCamera levelCamera;
-        List<ForceApplier> forceAppliers;
+        private List<ForceApplier> forceAppliers;
         private Sound wonSound;
         private Sound lostSound;
         public int collectablesCollected { get; private set; }

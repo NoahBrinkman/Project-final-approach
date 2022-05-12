@@ -7,8 +7,8 @@ public class MyGame : Game
 {
 
     private List<GameObject> scenes = new List<GameObject>();
-    Sound music;
-    SoundChannel musicChannel;
+    private Sound music;
+    private SoundChannel musicChannel;
     public MyGame() : base(1366, 768, false)
     {
         /*TestingScene scene = new TestingScene();

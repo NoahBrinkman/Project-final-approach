@@ -9,7 +9,7 @@ namespace GXPEngine
 	public class Button : AnimationSprite
 	{
 		public Action OnClicked;
-		Sound buttonSound;
+		private Sound buttonSound;
 
 		public Button(string fileName, Action action, int cols = 3, int rows = 1, int frames = 3) : base(fileName,cols,rows, frames, false,false)
 		{

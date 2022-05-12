@@ -15,15 +15,15 @@ namespace GXPEngine
                 return _position;
             }
         }
-        MyGame myGame;
+        private MyGame myGame;
 
-        Vector2 _position;
-        Vector2 _velocity;
-        Vector2 _acceleration;
+        private Vector2 _position;
+        private Vector2 _velocity;
+        private Vector2 _acceleration;
 
-        Vector2 _mouseStartPosition;
-        Vector2 _mouseEndPosition;
-        EasyDraw _easyDraw;
+        private Vector2 _mouseStartPosition;
+        private Vector2 _mouseEndPosition;
+        private EasyDraw _easyDraw;
 
         public Level level;
         public bool isMoving

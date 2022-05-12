@@ -4,7 +4,7 @@ namespace GXPEngine
 {
     public class Collectable : AnimationSprite
     {
-        Sound collectedSound;
+       private Sound collectedSound;
 
         public Collectable(string fileName, int rows, int cols, TiledObject obj = null) 
             : base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
