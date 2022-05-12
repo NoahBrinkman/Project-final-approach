@@ -94,7 +94,7 @@ namespace GXPEngine
                 _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
                 Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
                 Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) *
-                                (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
+                                (Mathf.Clamp(diffVec.Length() / 4, 0, maxSpeed));
                 if (charging)
                 {
                     Vector2 projection = _position;
