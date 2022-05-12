@@ -182,9 +182,10 @@ namespace GXPEngine
 
         private void OnGoalHit()
         {
+            overlay.hasWon = true;
             EndLevel();
             wonSound.Play();
-            overlay.hasWon = true;
+           
         }
 
         private void EndLevel()

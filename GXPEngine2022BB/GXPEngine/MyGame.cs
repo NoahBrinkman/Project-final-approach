@@ -46,7 +46,6 @@ public class MyGame : Game
 	{
         SceneManager.instance.WipeScenes();
         LoadGame();
-        List<GameObject> Children = new List<GameObject>();
 	}
 
     public void Update()
