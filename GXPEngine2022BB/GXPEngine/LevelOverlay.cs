@@ -10,7 +10,7 @@ namespace GXPEngine
     class LevelOverlay : GameObject
     {
     // Show amount of stars
-        EasyDraw overlay;
+        private EasyDraw overlay;
         public bool hasWon;
         private LevelCamera cam;
 
@@ -20,8 +20,8 @@ namespace GXPEngine
         private Sprite wonMessage;
         private Sprite lossMessage;
 
-        List<Sprite> collected;
-        List<Sprite> notCollected;
+        private List<Sprite> collected;
+        private List<Sprite> notCollected;
 
         public LevelOverlay(LevelCamera camera)
         {
@@ -97,7 +97,6 @@ namespace GXPEngine
             collected.ForEach(x => x.visible = false);
             for (int i = 0; i < collectableAmount; i++)
             {
-                Console.WriteLine("hi");
                 collected[i].visible = true;
             }
         }

@@ -13,7 +13,7 @@ namespace GXPEngine
 		public bool shouldBeActivatable = true;
 		public bool activatable = true;
 		public bool activated = false;
-		private LevelCamera camera;
+		private Level level;
 		public TogglableForceApplier(string fileName, int rows, int cols, TiledObject obj = null) : base( obj)
 		{
 			Initialize(obj);
@@ -24,17 +24,17 @@ namespace GXPEngine
 		}
 
 
-		public void SetLevelCamera(LevelCamera cam)
+		public void SetLevel(Level lvl)
 		{
-			camera = cam;
+			level = lvl;
 		}
 		
 		void Update()
 		{
 			if (activatable)
 			{
-				float mouseX = camera.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
-				if(Input.GetMouseButtonDown(0) && (mouseX  > (x ) - width/2 && mouseX < (x) + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2))
+				float mouseX = level.levelCamera.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
+				if(Input.GetMouseButtonDown(0) && (mouseX  > x - width/2 && mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2))
 				{
 					OnClicked();
 				}
@@ -58,28 +58,15 @@ namespace GXPEngine
 		}
 		void OnClicked()
 		{
-			Console.WriteLine(_frames);
 			activated = !activated;
 		}
 		public override bool IsInHorizontalReach(GameObject other, float width, float height)
 		{
-			if (activated)
-            {
-				return base.IsInHorizontalReach(other, width, height);
-			}	
-			else
-			{
-				return false;
-			}
+			return base.IsInHorizontalReach(other, width, height) && activated;
 		}
 		public override bool IsInVerticalReach(GameObject other, float width, float height)
 		{
-			if (activated)
-				return base.IsInVerticalReach(other, width, height);
-			else
-			{
-				return false;
-			}
+			return base.IsInVerticalReach(other, width, height) && activated;
 		}
 	}
 }

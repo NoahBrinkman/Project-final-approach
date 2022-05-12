@@ -15,17 +15,17 @@ namespace GXPEngine
                 return _position;
             }
         }
-        MyGame myGame;
+        private MyGame myGame;
 
-        Vector2 _position;
-        Vector2 _velocity;
-        Vector2 _acceleration;
+        private Vector2 _position;
+        private Vector2 _velocity;
+        private Vector2 _acceleration;
 
-        Vector2 _mouseStartPosition;
-        Vector2 _mouseEndPosition;
-        EasyDraw _easyDraw;
+        private Vector2 _mouseStartPosition;
+        private Vector2 _mouseEndPosition;
+        private EasyDraw _easyDraw;
 
-        public LevelCamera cam;
+        public Level level;
         public bool isMoving
         {
             get
@@ -79,22 +79,16 @@ namespace GXPEngine
             {
                 parent.AddChild(_easyDraw);
             }
+            
             _easyDraw.ClearTransparent();
-			if (Input.GetKeyDown(Key.R))
-			{
-                _position.SetXY(206.67f, 489.33f);
-                _velocity = new Vector2();
-                Level currentScene = (Level)SceneManager.instance.activeScene;
-                currentScene.PlayerStoppedMoving();
-			}
 
-                
-            float mouseX = cam.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
+
+            float mouseX = level.levelCamera.ScreenPointToGlobal(Input.mouseX, Input.mouseY).x;
             if(Input.GetMouseButtonDown(0) && (mouseX  > (x ) - width/2 && mouseX < (x) + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
                 {
                     _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
                     charging = true;
-                    cam.canDrag = false;
+                    level.levelCamera.canDrag = false;
                 }
 
                 _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
@@ -115,19 +109,16 @@ namespace GXPEngine
 
                 if (Input.GetMouseButtonUp(0) && charging)
                 {
-                    Level currentScene = (Level)SceneManager.instance.activeScene;
-                    currentScene.PlayerStartedMoving();
+                    level.PlayerStartedMoving();
                     _velocity = speed;
                     charging = false;
                     SetCycle(0, 8);
                 }
             if (isMoving)
             {
-                //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
-                Level currentScene = (Level)SceneManager.instance.activeScene;
-                for (int i = 0; i < currentScene.GetNumberOfAppliers(); i++)
+                for (int i = 0; i < level.GetNumberOfAppliers(); i++)
                 {
-                    ForceApplier applier = currentScene.GetForceApplier(i);
+                    ForceApplier applier = level.GetForceApplier(i);
                     if (applier.IsInHorizontalReach(this, width, height) || applier.IsInVerticalReach(this, width, height))
                     {
                         _velocity += applier.force;
@@ -135,7 +126,7 @@ namespace GXPEngine
                 }
 
                 //Kill player when reaching border
-                if(_position.x > currentScene.GetBorders().x || _position.x < 0 || _position.y > currentScene.GetBorders().y || _position.y < 0)
+                if(_position.x > level.GetBorders().x || _position.x < 0 || _position.y > level.GetBorders().y || _position.y < 0)
                 {
                     death.Invoke();
                     LateDestroy();

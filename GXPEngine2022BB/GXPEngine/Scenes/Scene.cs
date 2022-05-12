@@ -9,12 +9,8 @@ namespace GXPEngine
     /// </summary>
     public class Scene : GameObject
     {
-        public bool isActive = true;
-        public bool softUnload = false;
-        public bool displayHUD { get; private set; }
         public Scene(bool displayHUD = false)
         {
-            this.displayHUD = displayHUD;
         }
         
         /// <summary>
@@ -28,7 +24,6 @@ namespace GXPEngine
 
         public virtual void Reload()
         {
-            softUnload = false;
             UnLoadScene();
             LoadScene();
         }
@@ -46,13 +41,12 @@ namespace GXPEngine
         
         protected virtual void Update()
         {
-            if (!isActive) return;
+           
         }
         
         protected virtual void Start()
         {
             visible = true;
-            isActive = true;
             GetChildren().ForEach(x => x.visible = true);
         }
     }

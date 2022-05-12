@@ -8,12 +8,12 @@ namespace GXPEngine.Scenes
 {
 	public class MainMenuScene : Scene
 	{
-		Button startButton;
+		private Button startButton;
 		public MainMenuScene()
 		{
 			Sprite bg = new Sprite("Backgrounds/Menu_Background.png");
 			AddChild(bg);
-			bg.scale = 1.05f;
+			bg.scale = 1.02f;
 			Sprite logo = new Sprite("UI/logo.png");
 			logo.SetOrigin(logo.width/2, logo.height/2);
 			logo.SetXY(game.width / 2, game.height / 2 - 200);
@@ -27,11 +27,6 @@ namespace GXPEngine.Scenes
 		}
 		private void OnButtonClicked()
 		{
-
-			/*MyGame mgame = (MyGame)game;
-			mgame.LoadFirstLevel();
-			mgame.DestroyScene(this);*/
-			softUnload = false;
 			SceneManager.instance.TryLoadNextScene();
 		}
 	}
