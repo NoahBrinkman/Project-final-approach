@@ -97,7 +97,6 @@ namespace GXPEngine
             collected.ForEach(x => x.visible = false);
             for (int i = 0; i < collectableAmount; i++)
             {
-                Console.WriteLine("hi");
                 collected[i].visible = true;
             }
         }

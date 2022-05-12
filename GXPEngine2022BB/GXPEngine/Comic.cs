@@ -8,7 +8,7 @@ namespace GXPEngine
 {
     public class Comic : AnimationSprite
     {
-        public Comic() : base("Comic.png", 3, 2)
+        public Comic(string fileName = "Comic.png", int cols = 3, int rows = 2) : base(fileName, cols, rows)
         {
             SetCycle(0, 6);
         }

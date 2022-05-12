@@ -31,6 +31,7 @@ namespace GXPEngine
         private Sound lostSound;
         public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
+
         public int GetNumberOfAppliers()
         {
             return forceAppliers.Count;
@@ -76,43 +77,45 @@ namespace GXPEngine
 					{
                         ForceApplier forceApplier = (ForceApplier)children[i];
                         forceAppliers.Add(forceApplier);
+                        if (forceApplier is TogglableForceApplier)
+                        {
+                            TogglableForceApplier togglableForceApplier = (TogglableForceApplier)forceApplier;
+                            togglableForceApplier.SetLevel(this);
+                            
+                        }
 					}
 
                     if(children[i].name.Contains("Background"))
                     {
                         background = (Sprite)children[i];
                     }
-   
-				}
+
+                    if (children[i] is Player)
+                    {
+                        Player p = (Player)children[i];
+                        this.player = p;
+                        player.death += OnPlayerDeath;
+                        this.player.level = this;
+                    }
+
+                    if (children[i] is Goal)
+                    {
+                        Goal goal = (Goal)children[i];
+                        goal.goalHit += OnGoalHit;
+                    }
+
+                }
             }
 
           
-            Player player = FindObjectOfType<Player>();
-            LevelCamera levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
+            //Player player = FindObjectOfType<Player>();
+            levelCamera = new LevelCamera(game.width/2,background.width -game.width/2, player);
             levelCamera.SetXY(game.width/2,game.height/2);
             AddChild(levelCamera);
-            if(player != null)
-            {
-                this.player = player;
-                player.death += OnPlayerDeath;
-                this.player.cam = levelCamera;
-            }
-            Goal goal = FindObjectOfType<Goal>(); 
-            if(goal != null)
-			{
-                goal.goalHit += OnGoalHit;
-            }
 
             overlay = new LevelOverlay(levelCamera);
             AddChild(overlay);
             overlay.TurnVisibility(false, 0);
-
-            List<ForceApplier> tForceAppliers = forceAppliers.Where(f => f is TogglableForceApplier).ToList();
-            foreach (ForceApplier tForceApplier in tForceAppliers)
-            {
-                TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
-                toggleForceApplier.SetLevelCamera(levelCamera);
-            }
         }
 
          void Update()
@@ -150,7 +153,7 @@ namespace GXPEngine
                     collectablesCollected = 0;
                 }
             }
-            player.cam.canDrag = true;
+            levelCamera.canDrag = true;
         }
         
         public Vector2 GetBorders()

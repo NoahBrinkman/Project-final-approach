@@ -18,15 +18,15 @@
             backButton.SetXY(100,100);
             AddChild(backButton);
             backButton.Mirror(true,false);
-            Button levelOne = new Button("UI/Level_One.png", LoadLevelOne,1,1,1);
+            LevelSelectButton levelOne = new LevelSelectButton("UI/Level_One.png", SceneManager.instance.LoadScene, 2,1,1,1);
             levelOne.SetXY(300,game.height/2);
             levelOne.SetOrigin(levelOne.width/2,levelOne.height/2);
             AddChild(levelOne);
-            Button levelTwo = new Button("UI/Level_Two.png", LoadLevelTwo,1,1,1);
+            LevelSelectButton levelTwo = new LevelSelectButton("UI/Level_Two.png", SceneManager.instance.LoadScene, 3,1,1,1);
             levelTwo.SetOrigin(levelTwo.width/2,levelTwo.height/2);
             levelTwo.SetXY(500,game.height/2);
             AddChild(levelTwo);
-            Button levelThree = new Button("UI/Level_Three.png", LoadLevelThree,1,1,1);
+            LevelSelectButton levelThree = new LevelSelectButton("UI/Level_Three.png", SceneManager.instance.LoadScene, 4,1,1,1);
             levelThree.SetOrigin(levelThree.width/2,levelThree.height/2);
             levelThree.SetXY(700,game.height/2);
             AddChild(levelThree);
@@ -39,21 +39,11 @@
             lockedLevelTwo.SetOrigin(lockedLevelTwo.width/2,lockedLevelTwo.height/2);
             AddChild(lockedLevelTwo);
         }
-        
-        private void LoadLevelOne()
+
+        private void LoadLevel(int i)
         {
-            SceneManager.instance.LoadScene(2);
+            SceneManager.instance.LoadScene(i);
         }
 
-        private void LoadLevelTwo()
-        {
-            SceneManager.instance.LoadScene(3);
-        }
-
-        private void LoadLevelThree()
-        {
-            SceneManager.instance.LoadScene(4);
-        }
-        
     }
 }

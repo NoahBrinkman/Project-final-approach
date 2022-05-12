@@ -27,10 +27,6 @@ namespace GXPEngine
             }
         }
 
-        /// <summary>
-        /// No variabless should instantly be set. However whenever a new scenemanager is created it
-        /// it should always be added as a child of game.
-        /// </summary>
         public SceneManager()
         {
             if (!game.GetChildren().Contains(this))
