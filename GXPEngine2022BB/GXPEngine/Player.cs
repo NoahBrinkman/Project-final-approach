@@ -168,12 +168,12 @@ namespace GXPEngine
               
             }
 
-            if(other is ForceApplier)
+            if(other is TogglableForceApplier)
             {
-                ForceApplier forceApplier = (ForceApplier)other;
-                if(forceApplier.threat == "shred")
+                TogglableForceApplier forceApplier = (TogglableForceApplier)other;
+                if(forceApplier.threat == "shred" && forceApplier.activated)
                     SetCycle(18, 9);
-                else if(forceApplier.threat == "fire")
+                else if(forceApplier.threat == "fire" && forceApplier.activated)
                     SetCycle(9, 9);
                 else
                     SetCycle(9, 0);              
