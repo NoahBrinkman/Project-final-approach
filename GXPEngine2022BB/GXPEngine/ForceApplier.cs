@@ -15,6 +15,7 @@ namespace GXPEngine
         public float reachBottom = 0;
         public Vector2 force;
         public int frameTotal;
+        public string threat;
 
         public ForceApplier(TiledObject obj=null) : 
             base(obj.GetStringProperty("fileName"), obj.GetIntProperty("cols"), obj.GetIntProperty("rows"))
@@ -33,6 +34,7 @@ namespace GXPEngine
             this.reachTop = obj.GetFloatProperty("reachTop");
             this.force = new Vector2(obj.GetFloatProperty("powerX"), obj.GetFloatProperty("powerY"));
             this.frameTotal = obj.GetIntProperty("frames");
+            this.threat = obj.GetStringProperty("threat");
             SetCycle(0,frameCount);
         }
 

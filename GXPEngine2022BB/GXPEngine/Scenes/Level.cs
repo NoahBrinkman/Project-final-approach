@@ -174,15 +174,14 @@ namespace GXPEngine
         {
             player.StopSimulating();
             lostSound.Play();
-            Timer(1, true);
+            Timer(1.5f, true);
         }
 
         private void OnGoalHit()
         {
-            player.StopSimulating();
+            EndLevel();
             wonSound.Play();
             overlay.hasWon = true;
-            Timer(1, true);
         }
 
         private void EndLevel()

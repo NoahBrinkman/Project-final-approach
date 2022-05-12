@@ -90,6 +90,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="300"/>
     <property name="rows" type="int" value="3"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
   <object id="346" type="GXPEngine.TogglableForceApplier" gid="58" x="1260.08" y="482.059" width="64" height="128">
@@ -106,6 +107,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="800"/>
     <property name="rows" type="int" value="3"/>
+    <property name="threat" value="fire"/>
    </properties>
   </object>
   <object id="347" type="GXPEngine.TogglableForceApplier" gid="70" x="1730.67" y="101.333" width="128" height="128">
@@ -122,6 +124,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="0"/>
     <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
   <object id="349" type="GXPEngine.TogglableForceApplier" gid="70" x="474" y="130" width="128" height="128">
@@ -138,6 +141,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="0"/>
     <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
   <object id="353" type="GXPEngine.TogglableForceApplier" gid="2147483721" x="1822.33" y="506" width="64" height="100">
@@ -154,6 +158,7 @@
     <property name="reachRight" type="float" value="1e+09"/>
     <property name="reachTop" type="float" value="0"/>
     <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
  </objectgroup>

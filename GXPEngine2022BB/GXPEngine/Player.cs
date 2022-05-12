@@ -167,12 +167,21 @@ namespace GXPEngine
 				}
               
             }
+
+            if(other is ForceApplier)
+            {
+                ForceApplier forceApplier = (ForceApplier)other;
+                if(forceApplier.threat == "shred")
+                    SetCycle(18, 9);
+                if(forceApplier.threat == "fire")
+                    SetCycle(9, 9);
+            }
         }
 
         public void StopSimulating()
         {
-            _acceleration = new Vector2(0,1);
-            _velocity = new Vector2(0,1);
+            _acceleration = new Vector2(0,0);
+            _velocity = new Vector2(0,0);
         }
 
         static void Death()
