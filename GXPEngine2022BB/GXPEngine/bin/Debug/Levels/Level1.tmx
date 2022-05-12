@@ -90,6 +90,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="0"/>
     <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
   <object id="343" type="GXPEngine.TogglableForceApplier" gid="62" x="563.216" y="561.944" width="64" height="118">
@@ -106,6 +107,7 @@
     <property name="reachRight" type="float" value="0"/>
     <property name="reachTop" type="float" value="10000"/>
     <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
    </properties>
   </object>
  </objectgroup>

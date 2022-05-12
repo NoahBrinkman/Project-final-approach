@@ -173,10 +173,10 @@ namespace GXPEngine
                 ForceApplier forceApplier = (ForceApplier)other;
                 if(forceApplier.threat == "shred")
                     SetCycle(18, 9);
-                if(forceApplier.threat == "fire")
+                else if(forceApplier.threat == "fire")
                     SetCycle(9, 9);
-                if (forceApplier.threat == "default")
-                    SetCycle(9,0);
+                else
+                    SetCycle(9, 0);              
             }
         }
 
