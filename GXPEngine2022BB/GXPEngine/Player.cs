@@ -175,6 +175,8 @@ namespace GXPEngine
                     SetCycle(18, 9);
                 if(forceApplier.threat == "fire")
                     SetCycle(9, 9);
+                if (forceApplier.threat == "default")
+                    SetCycle(9,0);
             }
         }
 
