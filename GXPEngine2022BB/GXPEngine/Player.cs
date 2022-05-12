@@ -166,6 +166,8 @@ namespace GXPEngine
                     SetCycle(18, 9);
                 else if(forceApplier.threat == "fire" && forceApplier.activated)
                     SetCycle(9, 9);
+                else
+                    SetCycle(9, 0);
             }
             else
             {
