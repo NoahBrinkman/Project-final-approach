@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="21" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="354">
+ <tileset firstgid="1" name="triangle" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="../GXPAssets/triangle.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="2" name="square" tilewidth="64" tileheight="64" tilecount="1" columns="1">
+  <image source="../GXPAssets/square.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="3" name="PH_FanUp" tilewidth="410" tileheight="589" tilecount="1" columns="1">
+  <image source="../InGameAssets/PH_FanUp.png" width="410" height="589"/>
+ </tileset>
+ <tileset firstgid="4" name="PH_CeilingFan" tilewidth="624" tileheight="178" tilecount="1" columns="1">
+  <image source="../InGameAssets/PH_CeilingFan.png" width="624" height="178"/>
+ </tileset>
+ <tileset firstgid="5" name="PH_Heart" tilewidth="557" tileheight="438" tilecount="1" columns="1">
+  <image source="../InGameAssets/PH_Heart.png" width="557" height="438"/>
+ </tileset>
+ <tileset firstgid="6" name="heart_spritesheet" tilewidth="64" tileheight="64" tilecount="12" columns="4">
+  <image source="../InGameAssets/heart_spritesheet.png" width="256" height="192"/>
+ </tileset>
+ <tileset firstgid="18" name="paper_airplane_spritesheet" tilewidth="128" tileheight="128" tilecount="32" columns="8">
+  <image source="../InGameAssets/paper_airplane_spritesheet.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="50" name="star_spritesheet" tilewidth="64" tileheight="64" tilecount="8" columns="4">
+  <image source="../InGameAssets/star_spritesheet.png" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="58" name="fire_spritesheet" tilewidth="64" tileheight="128" tilecount="12" columns="4">
+  <image source="../InGameAssets/fire_spritesheet.png" width="256" height="384"/>
+ </tileset>
+ <tileset firstgid="70" name="fan_ceiling_spritesheet" tilewidth="128" tileheight="128" tilecount="3" columns="3">
+  <image source="../InGameAssets/fan_ceiling_spritesheet.png" width="384" height="128"/>
+ </tileset>
+ <tileset firstgid="73" name="fan_standing.spritesheet2" tilewidth="64" tileheight="100" tilecount="3" columns="3">
+  <grid orientation="orthogonal" width="64" height="128"/>
+  <image source="../InGameAssets/fan_standing.spritesheet.png" width="192" height="100"/>
+ </tileset>
+ <imagelayer id="3" name="background">
+  <image source="../Backgrounds/Lab_Background.png" width="2732" height="768"/>
+  <properties>
+   <property name="fileName" value="PH_BackgroundDouble.png"/>
+  </properties>
+ </imagelayer>
+ <objectgroup draworder="index" id="2" name="Objects">
+  <object id="330" type="GXPEngine.Goal" gid="6" x="2500" y="512" width="64" height="64">
+   <properties>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/heart_spritesheet.png"/>
+    <property name="rows" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="331" type="GXPEngine.Player" gid="18" x="272.613" y="490.39" width="75" height="75">
+   <properties>
+    <property name="cols" type="int" value="8"/>
+    <property name="fileName" value="InGameAssets/paper_airplane_spritesheet.png"/>
+    <property name="rows" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="337" type="GXPEngine.Collectable" gid="50" x="465.3" y="379.333" width="64" height="64">
+   <properties>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
+    <property name="rows" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="339" type="GXPEngine.Collectable" gid="50" x="1339.38" y="265.575" width="64" height="64">
+   <properties>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
+    <property name="rows" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="340" type="GXPEngine.Collectable" gid="50" x="2164.63" y="521.763" width="64" height="64">
+   <properties>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/star_SpriteSheet.png"/>
+    <property name="rows" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="344" type="GXPEngine.TogglableForceApplier" gid="58" x="811.401" y="485.686" width="64" height="128">
+   <properties>
+    <property name="activatable" type="bool" value="false"/>
+    <property name="activated" type="bool" value="true"/>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/fire_spritesheet.png"/>
+    <property name="frames" type="int" value="12"/>
+    <property name="powerX" type="float" value="0"/>
+    <property name="powerY" type="float" value="-0.15"/>
+    <property name="reachBottom" type="float" value="0"/>
+    <property name="reachLeft" type="float" value="0"/>
+    <property name="reachRight" type="float" value="0"/>
+    <property name="reachTop" type="float" value="300"/>
+    <property name="rows" type="int" value="3"/>
+    <property name="threat" value="fire"/>
+   </properties>
+  </object>
+  <object id="346" type="GXPEngine.TogglableForceApplier" gid="58" x="1260.08" y="482.059" width="64" height="128">
+   <properties>
+    <property name="activatable" type="bool" value="true"/>
+    <property name="activated" type="bool" value="false"/>
+    <property name="cols" type="int" value="4"/>
+    <property name="fileName" value="InGameAssets/fire_spritesheet.png"/>
+    <property name="frames" type="int" value="12"/>
+    <property name="powerX" type="float" value="0"/>
+    <property name="powerY" type="float" value="-0.4"/>
+    <property name="reachBottom" type="float" value="0"/>
+    <property name="reachLeft" type="float" value="0"/>
+    <property name="reachRight" type="float" value="0"/>
+    <property name="reachTop" type="float" value="800"/>
+    <property name="rows" type="int" value="3"/>
+    <property name="threat" value="fire"/>
+   </properties>
+  </object>
+  <object id="347" type="GXPEngine.TogglableForceApplier" gid="70" x="1730.67" y="101.333" width="128" height="128">
+   <properties>
+    <property name="activatable" type="bool" value="false"/>
+    <property name="activated" type="bool" value="true"/>
+    <property name="cols" type="int" value="3"/>
+    <property name="fileName" value="InGameAssets/fan_ceiling_spritesheet.png"/>
+    <property name="frames" type="int" value="3"/>
+    <property name="powerX" type="float" value="0"/>
+    <property name="powerY" type="float" value="1"/>
+    <property name="reachBottom" type="float" value="500"/>
+    <property name="reachLeft" type="float" value="0"/>
+    <property name="reachRight" type="float" value="0"/>
+    <property name="reachTop" type="float" value="0"/>
+    <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
+   </properties>
+  </object>
+  <object id="349" type="GXPEngine.TogglableForceApplier" gid="70" x="474" y="130" width="128" height="128">
+   <properties>
+    <property name="activatable" type="bool" value="true"/>
+    <property name="activated" type="bool" value="false"/>
+    <property name="cols" type="int" value="3"/>
+    <property name="fileName" value="InGameAssets/fan_ceiling_spritesheet.png"/>
+    <property name="frames" type="int" value="3"/>
+    <property name="powerX" type="float" value="0"/>
+    <property name="powerY" type="float" value="0.2"/>
+    <property name="reachBottom" type="float" value="10000"/>
+    <property name="reachLeft" type="float" value="0"/>
+    <property name="reachRight" type="float" value="0"/>
+    <property name="reachTop" type="float" value="0"/>
+    <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
+   </properties>
+  </object>
+  <object id="353" type="GXPEngine.TogglableForceApplier" gid="2147483721" x="1822.33" y="506" width="64" height="100">
+   <properties>
+    <property name="activatable" type="bool" value="true"/>
+    <property name="activated" type="bool" value="false"/>
+    <property name="cols" type="int" value="3"/>
+    <property name="fileName" value="InGameAssets/fan_standing.spritesheet.png"/>
+    <property name="frames" type="int" value="3"/>
+    <property name="powerX" type="float" value="0.6"/>
+    <property name="powerY" type="float" value="-0.03"/>
+    <property name="reachBottom" type="float" value="0"/>
+    <property name="reachLeft" type="float" value="0"/>
+    <property name="reachRight" type="float" value="1e+09"/>
+    <property name="reachTop" type="float" value="0"/>
+    <property name="rows" type="int" value="1"/>
+    <property name="threat" value="shred"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

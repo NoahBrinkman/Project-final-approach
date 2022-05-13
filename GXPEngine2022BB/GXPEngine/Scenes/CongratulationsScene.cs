@@ -10,21 +10,16 @@ namespace GXPEngine.Scenes
 	{
 		public CongratulationsScene()
 		{
-			Sprite logo = new Sprite("cursed_GoodJob.png");
-			logo.SetOrigin(logo.width / 2, logo.height / 2);
-			logo.SetXY(game.width / 2, game.height / 2 - 200);
-			logo.scale = .7f;
-			AddChild(logo);
-			Button restartButton = new Button("cursed_Next.png", OnButtonClicked);
-			restartButton.SetOrigin(restartButton.width / 2, restartButton.height / 2);
-			restartButton.SetXY(game.width / 2, game.height / 2 + 200);
-			AddChild(restartButton);
-		}
-
-		private void OnButtonClicked()
-		{
 			MyGame mg = (MyGame)game;
-			mg.ReloadGame();
+			
+			Sprite bg = new Sprite("Backgrounds/ThankYou_Background.png");
+			AddChild(bg);
+			
+			Button backButton = new Button("UI/next_back_spritesheet.png", mg.ReloadGame);
+			backButton.SetOrigin(backButton.width/2,backButton.height/2);
+			backButton.SetXY(100,100);
+			backButton.Mirror(true,false);
+			AddChild(backButton);
 		}
 	}
 }

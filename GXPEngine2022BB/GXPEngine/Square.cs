@@ -26,7 +26,7 @@ namespace GXPEngine
         EasyDraw _easyDraw;
 
         public LevelCamera cam;
-        bool isMoving
+        public bool isMoving
         {
             get
             {
@@ -124,6 +124,13 @@ namespace GXPEngine
                         _velocity += applier.force;
                     }
                 }
+
+                //Kill player when reaching border
+                if(_position.x > currentScene.GetBorders().x || _position.x < 0 || _position.y > currentScene.GetBorders().y || _position.y < 0)
+                {
+                    death.Invoke();
+                }
+
                 //_acceleration += new Vector2(0, _acceleration.y / 2);
                 _velocity += _acceleration;
                 _velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
