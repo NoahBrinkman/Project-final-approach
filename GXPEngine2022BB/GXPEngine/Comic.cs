@@ -9,7 +9,7 @@ namespace GXPEngine
     public class Comic : AnimationSprite
     {
         private int lastFrame;
-        public Comic(string fileName = "Comic.png", int cols = 3, int rows = 2) : base(fileName, cols, rows)
+        public Comic(string fileName = "Comic.png", int cols = 3, int rows = 2) : base(fileName, cols, rows,rows*cols,false,false)
         {
             SetCycle(0, cols * rows);
             lastFrame = cols*rows - 1;
