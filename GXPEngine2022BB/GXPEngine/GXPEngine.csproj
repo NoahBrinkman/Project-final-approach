@@ -40,11 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collectable.cs" />
+    <Compile Include="Comic.cs" />
     <Compile Include="ForceApplier.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
+    <Compile Include="LevelButton.cs" />
+    <Compile Include="LevelCamera.cs" />
+    <Compile Include="LevelOverlay.cs" />
+    <Compile Include="LevelSelectButton.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="GXPEngine\Core\Canvas.cs" />
     <Compile Include="GXPEngine\Game.cs" />
@@ -85,13 +91,12 @@
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Scenes\CongratulationsScene.cs" />
-    <Compile Include="Scenes\GameOverScene.cs" />
     <Compile Include="Scenes\Level.cs" />
+    <Compile Include="Scenes\LevelSelectScene.cs" />
     <Compile Include="Scenes\MainMenuScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
-    <Compile Include="Scenes\TestingScene.cs" />
-    <Compile Include="Square.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="TogglableForceApplier.cs" />
   </ItemGroup>
   <ItemGroup>

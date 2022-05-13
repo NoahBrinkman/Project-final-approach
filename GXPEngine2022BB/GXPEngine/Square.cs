@@ -24,7 +24,9 @@ namespace GXPEngine
         Vector2 _mouseStartPosition;
         Vector2 _mouseEndPosition;
         EasyDraw _easyDraw;
-        bool isMoving
+
+        public LevelCamera cam;
+        public bool isMoving
         {
             get
             {
@@ -38,12 +40,11 @@ namespace GXPEngine
 
         public Square(string fileName, int rows, int cols, TiledObject obj = null) : base(obj.GetStringProperty("fileName"), 1, 1)
         {
-           
             SetOrigin(width / 2, height / 2);
             Initialize(obj);
         }
 
-        public Square(Vector2 pPosition, Vector2 pVelocity) : base("square.png", 1, 1)
+        public Square(Vector2 pPosition, Vector2 pVelocity) : base("PH_Airplane.png", 1, 1)
         {
             myGame = (MyGame)game;
             _easyDraw = new EasyDraw(game.width, game.height, false);
@@ -51,16 +52,15 @@ namespace GXPEngine
             _velocity = new Vector2();
             _acceleration = new Vector2(0f, .03f);
             charging = false;
-            parent.AddChild(_easyDraw);
             death = new Action(Death);
         }
         void Initialize(TiledObject obj)
         {
             myGame = (MyGame)game;
             _easyDraw = new EasyDraw(game.width, game.height,false);
+            
             _position = new Vector2(obj.X, obj.Y);
             _acceleration = new Vector2(0.04f, .025f);
-            game.AddChild(_easyDraw);
             death = new Action(Death);
         }
 
@@ -72,17 +72,23 @@ namespace GXPEngine
 
         void Update()
         {
-
+            if (_easyDraw.parent == null)
+            {
+                parent.AddChild(_easyDraw);
+            }
             _easyDraw.ClearTransparent();
 			if (Input.GetKeyDown(Key.R))
 			{
-                _position.SetXY(200, 100);
+                _position.SetXY(206.67f, 489.33f);
                 _velocity = new Vector2();
+                Level currentScene = (Level)SceneManager.instance.activeScene;
+                currentScene.PlayerStoppedMoving();
 			}
             if (Input.GetMouseButtonDown(0) && (Input.mouseX > x-width/2 && Input.mouseX < x + width/2) && (Input.mouseY > y - height/2 && Input.mouseY < y + height/2) && !isMoving)
             {
                 _mouseStartPosition = new Vector2(Input.mouseX, Input.mouseY);
                 charging = true;
+                cam.canDrag = false;
             }
             _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
             Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
@@ -100,7 +106,8 @@ namespace GXPEngine
 			}
             if (Input.GetMouseButtonUp(0) && charging)
             {
-
+                Level currentScene = (Level)SceneManager.instance.activeScene;
+                currentScene.PlayerStartedMoving();
                 _velocity = speed;
                 charging = false;
             }
@@ -108,7 +115,7 @@ namespace GXPEngine
             if (isMoving)
             {
                 //TEMPORARY CODE PLEASE REMOVE AND CHANGE WITH GETACTIVE LEVEL AS SOON AS POSSIBLE BUT FOR TESTING SCENE THIS IS FINE
-                Level currentScene = myGame.GetCurrentLevel();
+                Level currentScene = (Level)SceneManager.instance.activeScene;
                 for (int i = 0; i < currentScene.GetNumberOfAppliers(); i++)
                 {
                     ForceApplier applier = currentScene.GetForceApplier(i);
@@ -117,8 +124,17 @@ namespace GXPEngine
                         _velocity += applier.force;
                     }
                 }
+
+                //Kill player when reaching border
+                if(_position.x > currentScene.GetBorders().x || _position.x < 0 || _position.y > currentScene.GetBorders().y || _position.y < 0)
+                {
+                    death.Invoke();
+                }
+
                 //_acceleration += new Vector2(0, _acceleration.y / 2);
                 _velocity += _acceleration;
+                _velocity.x = Mathf.Clamp(_velocity.x, 0, maxSpeed);
+                _velocity.y = Mathf.Clamp(_velocity.y, -maxSpeed, maxSpeed);
                 _position += _velocity;
             }
             UpdateScreenPosition();
@@ -137,6 +153,9 @@ namespace GXPEngine
             }
         }
 
-        static void Death() => Console.WriteLine("dead");
+        static void Death()
+        {
+            Console.WriteLine("dead");
+        } 
     }
 }

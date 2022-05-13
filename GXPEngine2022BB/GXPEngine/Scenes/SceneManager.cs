@@ -9,10 +9,12 @@ namespace GXPEngine
     /// </summary>
     public class SceneManager : GameObject
     {
-        private List<Scene> scenes = new List<Scene>();
-        private Scene activeScene;
-        
+        private List<Scene> scenes;
+
         private static SceneManager _instance = null;
+        public Scene activeScene { get; private set; }
+
+        private int firstLevelIndex = -1;
         public static SceneManager instance
         {
             get
@@ -26,10 +28,7 @@ namespace GXPEngine
                 return _instance;
             }
         }
-        /// <summary>
-        /// No variabless should instantly be set. However whenever a new scenemanager is created it
-        /// it should always be added as a child of game.
-        /// </summary>
+
         public SceneManager()
         {
             if (!game.GetChildren().Contains(this))
@@ -37,123 +36,72 @@ namespace GXPEngine
                 game.AddChild(this);
             }
         }
-        /// <summary>
-        /// Add and insantly disable the scene added.
-        /// </summary>
-        /// <param name="sceneToAdd"></param>
-        public void AddScene(Scene sceneToAdd)
+
+        public void AddScene(Scene scene)
         {
-            scenes.Add(sceneToAdd);
-            AddChild(sceneToAdd);
-            sceneToAdd.visible = false;
-            sceneToAdd.isActive = false;
+            bool firstAdded = false;
+            if (scenes == null || scenes.Count == 0)
+            {
+                scenes = new List<Scene>();
+                firstAdded = true;
+            }
+
+
+            scenes.Add(scene);
+            if (scene is Level && firstLevelIndex == -1)
+            {
+                firstLevelIndex = scenes.IndexOf(scene);
+            }
+            if (firstAdded)
+            {
+                activeScene = scene;
+                AddChild(activeScene);
+            }
+            
         }
-        
-        /// <summary>
-        /// Return the currently active scene
-        /// </summary>
-        /// <returns></returns>
-        public Scene GetActiveScene()
-        {
-            return activeScene;
-        }
-        /// <summary>
-        /// Attempt to load the next scene if possible.
-        /// </summary>
-        public void TryLoadNextScene()
-        {
-            int index = scenes.IndexOf(activeScene);
-            if (index + 1 >= scenes.Count) return;
-            index++;
-            Console.WriteLine((index));
-            LoadScene((index));
-        }
-        /// <summary>
-        /// Load the last scene in the buildindex. (good for game over screens)
-        /// </summary>
-        public void LoadLastScene()
-        {
-            LoadScene(scenes.Count - 1);
-        }
-        
-        /// <summary>
-        /// LoadScene depending on the index you provide
-        /// </summary>
-        /// <param name="buildIndex"></param>
+
         public void LoadScene(int buildIndex)
         {
-            Console.WriteLine("Loading scene: " + buildIndex);
-            if (activeScene != null)
+            if (buildIndex > 0 && buildIndex < scenes.Count)
             {
-                activeScene.UnLoadScene();
-            }
-            activeScene = scenes[buildIndex];
-            foreach (Scene scene in scenes)
-            {
-                if (scene != activeScene)
-                {
-                    activeScene.visible = false;
-                    activeScene.isActive = false;
-                }
-            }
-            activeScene.LoadScene();
-            activeScene.visible = true;
-            activeScene.isActive = true;
-        }
-        /// <summary>
-        /// Load a scene depending on a scene you provide
-        /// </summary>
-        /// <param name="scene"></param>
-        public void LoadScene(Scene scene)
-        {
-            if (scenes.Contains(scene))
-            {
-                if(activeScene != null)
-				{
-                    activeScene.UnLoadScene();
-                }
-                activeScene = scene;
+                activeScene.LateDestroy();
+                activeScene = scenes[buildIndex];
                 activeScene.LoadScene();
+                LateAddChild(activeScene);
             }
-        }
-        /// <summary>
-        /// Get the currently active scene if it is a level
-        /// </summary>
-        /// <returns></returns>
-        public Level GetActiveLevel()
-        {
-            if (activeScene is Level)
+
+            if(buildIndex == firstLevelIndex)
             {
-              //  return (Level)activeScene;
+                Comic comic = new Comic();
+                LateAddChild(comic);
             }
-            return null;
-        }
-        /// <summary>
-        /// For debugging press P to show the currently loaded scene and how many scenes there are in the list
-        /// </summary>
-        void Update()
-        {
-            if (Input.GetKeyDown(Key.P))
+
+            if (buildIndex == scenes.Count - 1)
             {
-                Console.WriteLine("Total Scenes: " + scenes.Count);
-                Console.WriteLine("Current Scene: "+ scenes.IndexOf(activeScene));
+                Comic endComic = new Comic("End_Comic.png", 4, 1);
+                LateAddChild(endComic);
             }
         }
-        /// <summary>
-        /// Destroy all scenes from the list and create a new list.
-        /// </summary>
-        private void WipeScenes()
+        public void ReloadActiveScene()
         {
-            scenes.ForEach(x => x.LateDestroy());
-            scenes = new List<Scene>();
+            activeScene.Reload();
         }
-        /// <summary>
-        ///Reloads the entire game.
-        /// </summary>
-        public void ReloadGame()
+        public void LoadLastSceneInBuildIndex()
         {
-            MyGame myGame = (MyGame)game;
-            WipeScenes();          
+            LoadScene(scenes.Count-1);
+        }
+
+        public void TryLoadNextScene()
+        {
+            LoadScene(scenes.IndexOf(activeScene) + 1);
+        }
+
+        public void WipeScenes()
+        {
+            scenes.Clear();
+            activeScene.LateDestroy();
+            firstLevelIndex = -1;
+            scenes = null;
         }
     }
 }

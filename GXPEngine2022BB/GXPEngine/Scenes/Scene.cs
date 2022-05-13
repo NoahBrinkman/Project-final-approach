@@ -9,12 +9,8 @@ namespace GXPEngine
     /// </summary>
     public class Scene : GameObject
     {
-        public bool isActive = true;
-        public bool softUnload = false;
-        public bool displayHUD { get; private set; }
         public Scene(bool displayHUD = false)
         {
-            this.displayHUD = displayHUD;
         }
         
         /// <summary>
@@ -25,41 +21,32 @@ namespace GXPEngine
             Console.WriteLine("LoadScene started");
             Start();
         }
-        
+
+        public virtual void Reload()
+        {
+            UnLoadScene();
+            LoadScene();
+        }
         /// <summary>
         /// Remove all objects from this scene (softUnload means that objects will only be disabled)
         /// </summary>
-        public void UnLoadScene()
+        public virtual void UnLoadScene()
         {
-            if (softUnload)
-            {
-                foreach (GameObject gameObject in GetChildren())
+            foreach (GameObject gameObject in GetChildren())
                 {
                     if(gameObject != SceneManager.instance)
-                    gameObject.visible = false;
+                    gameObject.Destroy();
                 }
-            }
-            else
-            {
-                foreach (GameObject gameObject in GetChildren())
-                {
-                    if(gameObject != SceneManager.instance)
-                    gameObject.LateDestroy();
-                }
-            }
-            isActive = false;
-            visible = false;
         }
         
         protected virtual void Update()
         {
-            if (!isActive) return;
+           
         }
         
         protected virtual void Start()
         {
             visible = true;
-            isActive = true;
             GetChildren().ForEach(x => x.visible = true);
         }
     }
