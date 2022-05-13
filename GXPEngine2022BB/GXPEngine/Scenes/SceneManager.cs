@@ -13,6 +13,8 @@ namespace GXPEngine
 
         private static SceneManager _instance = null;
         public Scene activeScene { get; private set; }
+
+        private int firstLevelIndex = -1;
         public static SceneManager instance
         {
             get
@@ -43,7 +45,13 @@ namespace GXPEngine
                 scenes = new List<Scene>();
                 firstAdded = true;
             }
+
+
             scenes.Add(scene);
+            if (scene is Level && firstLevelIndex == -1)
+            {
+                firstLevelIndex = scenes.IndexOf(scene);
+            }
             if (firstAdded)
             {
                 activeScene = scene;
@@ -62,10 +70,16 @@ namespace GXPEngine
                 LateAddChild(activeScene);
             }
 
-            if(buildIndex == 2)
+            if(buildIndex == firstLevelIndex)
             {
                 Comic comic = new Comic();
                 LateAddChild(comic);
+            }
+
+            if (buildIndex == scenes.Count - 1)
+            {
+                Comic endComic = new Comic("End_Comic.png", 4, 1);
+                LateAddChild(endComic);
             }
         }
         public void ReloadActiveScene()
@@ -86,6 +100,7 @@ namespace GXPEngine
         {
             scenes.Clear();
             activeScene.LateDestroy();
+            firstLevelIndex = -1;
             scenes = null;
         }
     }

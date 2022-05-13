@@ -20,7 +20,7 @@ namespace GXPEngine
     /// </summary>
     public class Level : Scene
     {
-        
+
         public Action onLevelComplete;
         private string fileName;
         private Player player;
@@ -29,6 +29,8 @@ namespace GXPEngine
         private List<ForceApplier> forceAppliers;
         private Sound wonSound;
         private Sound lostSound;
+        private float timer;
+        private bool startTimer;
         public int collectablesCollected { get; private set; }
         private LevelOverlay overlay;
 
@@ -47,7 +49,7 @@ namespace GXPEngine
                 return null;
             }
         }
-        public Level( string fileName = "") : base(true)
+        public Level(string fileName = "") : base(true)
         {
             this.fileName = fileName;
             forceAppliers = new List<ForceApplier>();
@@ -56,7 +58,7 @@ namespace GXPEngine
         protected override void Start()
         {
             lostSound = new Sound("Sound/LevelLost.wav", false, false);
-            wonSound = new Sound("Sound/LevelWon.wav",false, false);
+            wonSound = new Sound("Sound/LevelWon.wav", false, false);
             Console.WriteLine("Start");
             visible = true;
             if (fileName != "")
@@ -71,10 +73,10 @@ namespace GXPEngine
                 levelMap.LoadObjectGroups();
 
                 List<GameObject> children = GetChildren();
-				for (int i = 0; i < children.Count; i++)
-				{
-                    if(children[i] is ForceApplier)
-					{
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (children[i] is ForceApplier)
+                    {
                         ForceApplier forceApplier = (ForceApplier)children[i];
                         forceAppliers.Add(forceApplier);
                         if (forceApplier is TogglableForceApplier)
@@ -85,7 +87,7 @@ namespace GXPEngine
                         }
 					}
 
-                    if(children[i].name.Contains("Background"))
+                    if (children[i].name.Contains("Background"))
                     {
                         background = (Sprite)children[i];
                     }
@@ -118,12 +120,22 @@ namespace GXPEngine
             overlay.TurnVisibility(false, 0);
         }
 
-         void Update()
+        void Update()
         {
             if (Input.GetKeyDown(Key.D))
             {
                 Console.WriteLine(GetChildCount());
             }
+
+            if (startTimer)
+            {
+                timer -= (float)Time.deltaTime / 1000;
+                if (timer < 0)
+                {
+                    EndLevel();
+                }
+            }
+
         }
 
         public void PlayerStartedMoving()
@@ -141,7 +153,7 @@ namespace GXPEngine
             foreach (ForceApplier tForceApplier in tForceAppliers)
             {
                 TogglableForceApplier toggleForceApplier = (TogglableForceApplier)tForceApplier;
-                if(toggleForceApplier.shouldBeActivatable)
+                if (toggleForceApplier.shouldBeActivatable)
                     toggleForceApplier.activatable = true;
             }
 
@@ -155,25 +167,38 @@ namespace GXPEngine
             }
             levelCamera.canDrag = true;
         }
-        
+
         public Vector2 GetBorders()
         {
-            return(new Vector2(background.width, background.height));
+            return (new Vector2(background.width, background.height));
         }
 
         public void OnPlayerDeath()
-		{
+        {
+            player.StopSimulating();
             lostSound.Play();
-            overlay.TurnVisibility(true, collectablesCollected);
-            player.LateDestroy();
+            Timer(1.5f, true);
         }
 
         private void OnGoalHit()
         {
-            wonSound.Play();
             overlay.hasWon = true;
+            EndLevel();
+            wonSound.Play();
+           
+        }
+
+        private void EndLevel()
+        {
+            Timer(0, false);
             overlay.TurnVisibility(true, collectablesCollected);
             player.LateDestroy();
+        }
+
+        private void Timer(float amount, bool state)
+        {
+            timer = amount;
+            startTimer = state;
         }
 
         public override void Reload()

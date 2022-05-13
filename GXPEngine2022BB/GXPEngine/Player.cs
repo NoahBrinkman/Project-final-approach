@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GXPEngine;
 using GXPEngine.Core;
 using GXPEngine.Scenes;
@@ -94,7 +94,7 @@ namespace GXPEngine
                 _mouseEndPosition = new Vector2(Input.mouseX, Input.mouseY);
                 Vector2 diffVec = _mouseStartPosition - _mouseEndPosition;
                 Vector2 speed = Vector2.GetUnitVectorDeg(diffVec.GetAngleDegrees()) *
-                                (Mathf.Clamp(diffVec.Length(), 0, maxSpeed));
+                                (Mathf.Clamp(diffVec.Length() / 4, 0, maxSpeed));
                 if (charging)
                 {
                     Vector2 projection = _position;
@@ -153,12 +153,32 @@ namespace GXPEngine
             {
 				if (isMoving)
 				{
-                    //death += Death;
                     if(death != null)
                         death.Invoke();
 				}
               
             }
+
+            if(other is TogglableForceApplier)
+            {
+                TogglableForceApplier forceApplier = (TogglableForceApplier)other;
+                if(forceApplier.threat == "shred" && forceApplier.activated)
+                    SetCycle(18, 9);
+                else if(forceApplier.threat == "fire" && forceApplier.activated)
+                    SetCycle(9, 9);
+                else
+                    SetCycle(9, 0);
+            }
+            else
+            {
+                SetCycle(9, 0);
+            }
+        }
+
+        public void StopSimulating()
+        {
+            _acceleration = new Vector2(0,0);
+            _velocity = new Vector2(0,0);
         }
 
         static void Death()
